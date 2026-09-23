@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Kesan Condition Bibir</title>
+  <meta name="theme-color" content="#e11d48">
+  <meta name="description" content="Analisis kondisi bibir: kering, kusam, sensitif, atau sihat terus dari kamera anda.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="min-h-screen bg-rose-50 font-sans text-slate-800 antialiased">
+  <header class="fixed inset-x-0 top-0 z-40 bg-gradient-to-r from-rose-600 to-pink-500 text-white shadow-md">
+    <div class="mx-auto max-w-md px-4 py-3">
+      <h1 class="text-lg font-extrabold leading-tight">Kesan Condition Bibir</h1>
+      <p class="text-xs font-medium text-rose-100">Analisis keadaan bibir anda terus dari kamera</p>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-md px-4 pb-28 pt-20">
+    <section id="screen-camera" aria-label="Skrin kamera">
+      <div id="camera-box" class="relative aspect-[3/4] w-full overflow-hidden rounded-3xl bg-slate-900 shadow-lg ring-1 ring-slate-900/10">
+        <video id="video" autoplay playsinline muted class="absolute inset-0 h-full w-full object-cover" aria-label="Pratonton kamera"></video>
+        <div class="pointer-events-none absolute left-1/2 top-1/2 h-[52%] w-[76%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border-2 border-dashed border-white/90" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-x-6 top-6 rounded-full bg-black/40 px-3 py-1 text-center text-[11px] font-semibold text-white/90 backdrop-blur-sm" aria-hidden="true">Selaraskan bibir dalam oval</div>
+        <div id="camera-loading" class="absolute inset-0 z-10 hidden flex-col items-center justify-center gap-3 bg-slate-900/70 text-white">
+          <div class="h-10 w-10 animate-spin rounded-full border-4 border-white/20 border-t-white"></div>
+          <p class="text-sm font-semibold">Menyediakan kamera…</p>
+        </div>
+        <div id="camera-start" class="absolute inset-0 z-10 hidden flex-col items-center justify-center gap-3 bg-slate-900/90 p-6 text-center text-white">
+          <button id="btn-start-camera" class="rounded-full bg-rose-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-rose-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Mula Kamera</button>
+          <label class="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-800 shadow transition hover:bg-rose-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-rose-400 focus-within:ring-offset-2 focus-within:ring-offset-slate-900">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            Pilih gambar dari galeri
+            <input type="file" id="file-input" accept="image/*" class="sr-only">
+          </label>
+          <p class="text-xs leading-relaxed text-slate-300">Sentuh untuk buka kamera, atau muat naik gambar wajah anda.</p>
+        </div>
+        <div id="camera-error" class="absolute inset-0 z-10 hidden flex-col items-center justify-center gap-3 bg-slate-900/90 p-6 text-center text-white">
+          <div class="flex h-12 w-12 items-center justify-center rounded-full bg-rose-500/20 text-2xl font-bold text-rose-300">!</div>
+          <p class="text-sm font-bold">Kamera tidak dapat diakses</p>
+          <p id="camera-error-msg" class="text-xs leading-relaxed text-slate-300"></p>
+          <label class="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-800 shadow transition hover:bg-rose-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-rose-400 focus-within:ring-offset-2 focus-within:ring-offset-slate-900">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            Pilih gambar dari galeri
+            <input type="file" id="file-input-2" accept="image/*" class="sr-only">
+          </label>
+          <button id="btn-retry-camera" class="rounded-full bg-white/10 px-4 py-2 text-xs font-bold text-white ring-1 ring-white/30 transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Cuba semula</button>
+        </div>
+        <div id="analyzing" class="absolute inset-x-0 bottom-0 z-10 hidden items-center justify-center gap-2 bg-slate-900/80 px-4 py-3 text-sm font-semibold text-white">
+          <div class="h-4 w-4 animate-spin rounded-full border-2 border-white/25 border-t-white"></div>
+          Menganalisis bibir…
+        </div>
+      </div>
+      <p class="mt-3 text-center text-xs leading-relaxed text-slate-500">Pastikan bibir berada dalam garisan oval, keringkan peluh, dan gunakan cahaya yang mencukupi.</p>
+      <button id="btn-capture" disabled class="mt-4 w-full rounded-2xl bg-rose-600 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-rose-600/25 transition hover:bg-rose-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">Tangkap</button>
+    </section>
+
+    <section id="screen-result" class="hidden" aria-label="Skrin keputusan">
+      <div id="result-preview-box" class="relative w-full overflow-hidden rounded-3xl bg-slate-900 shadow-lg ring-1 ring-slate-900/10" style="aspect-ratio: 10 / 9">
+        <img id="result-img" alt="Gambar bibir yang dianalisis" class="absolute inset-0 h-full w-full object-cover">
+        <div class="pointer-events-none absolute left-1/2 top-1/2 h-[52%] w-[76%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border-2 border-dashed border-white/90" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-x-6 bottom-3 rounded-full bg-black/40 px-3 py-1 text-center text-[11px] font-semibold text-white/90 backdrop-blur-sm" aria-hidden="true">Bingkai yang dianalisis</div>
+      </div>
+
+      <article id="cond-card" class="mt-4 rounded-3xl border border-slate-100 bg-white p-5 shadow-sm">
+        <div class="flex items-center justify-between gap-2">
+          <span id="cond-badge" class="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold">–</span>
+          <span id="conf-pct" class="text-sm font-extrabold text-slate-800">–</span>
+        </div>
+        <div class="mt-4">
+          <div class="flex items-center justify-between text-xs font-semibold text-slate-600">
+            <span>Keyakinan analisis</span>
+          </div>
+          <div class="mt-1.5 h-2.5 w-full overflow-hidden rounded-full bg-slate-200">
+            <div id="conf-bar" class="h-full rounded-full bg-gradient-to-r from-rose-500 to-pink-500 transition-all duration-500" style="width:0%"></div>
+          </div>
+        </div>
+      </article>
+
+      <h2 class="mt-6 text-sm font-bold uppercase tracking-wider text-slate-500">Metrik analisis</h2>
+      <div class="mt-2 space-y-3">
+        <article class="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold text-slate-700">Kecerahan (L*)</h3>
+            <div class="flex items-center gap-2">
+              <span id="m-light-tag" class="rounded-full px-2 py-0.5 text-xs font-bold"></span>
+              <span id="m-light-value" class="text-sm font-extrabold text-slate-800">–</span>
+            </div>
+          </div>
+          <div class="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-slate-100">
+            <div id="m-light-fill" class="h-full rounded-full bg-slate-400 transition-all duration-500" style="width:0%"></div>
+          </div>
+          <p id="m-light-reason" class="mt-2 text-xs leading-relaxed text-slate-500"></p>
+        </article>
+
+        <article class="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold text-slate-700">Tekstur</h3>
+            <div class="flex items-center gap-2">
+              <span id="m-texture-tag" class="rounded-full px-2 py-0.5 text-xs font-bold"></span>
+              <span id="m-texture-value" class="text-sm font-extrabold text-slate-800">–</span>
+            </div>
+          </div>
+          <div class="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-slate-100">
+            <div id="m-texture-fill" class="h-full rounded-full bg-slate-400 transition-all duration-500" style="width:0%"></div>
+          </div>
+          <p id="m-texture-reason" class="mt-2 text-xs leading-relaxed text-slate-500"></p>
+        </article>
+
+        <article class="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
+          <div class="flex items-center justify-between gap-2">
+            <h3 class="text-sm font-semibold text-slate-700">Kemerahan (a*)</h3>
+            <div class="flex items-center gap-2">
+              <span id="m-redness-tag" class="rounded-full px-2 py-0.5 text-xs font-bold"></span>
+              <span id="m-redness-value" class="text-sm font-extrabold text-slate-800">–</span>
+            </div>
+          </div>
+          <div class="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-slate-100">
+            <div id="m-redness-fill" class="h-full rounded-full bg-slate-400 transition-all duration-500" style="width:0%"></div>
+          </div>
+          <p id="m-redness-reason" class="mt-2 text-xs leading-relaxed text-slate-500"></p>
+        </article>
+      </div>
+
+      <div class="mt-6 grid grid-cols-2 gap-3">
+        <button id="btn-rescan" class="rounded-2xl bg-white px-6 py-4 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2">Imbas semula</button>
+        <button id="btn-save" class="rounded-2xl bg-rose-600 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-rose-600/25 transition hover:bg-rose-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">Simpan ke riwayat</button>
+      </div>
+      <p id="save-status" aria-live="polite" class="mt-3 text-center text-sm font-semibold text-slate-600"></p>
+    </section>
+
+    <section id="screen-history" class="hidden" aria-label="Skrin riwayat">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-extrabold text-slate-800">Riwayat</h2>
+        <div class="flex items-center gap-2">
+          <span id="history-count" class="text-xs font-semibold text-slate-500"></span>
+          <button id="btn-history-load" class="rounded-full bg-white px-3 py-1.5 text-xs font-bold text-rose-600 shadow-sm ring-1 ring-rose-200 transition hover:bg-rose-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2">Muat semula</button>
+        </div>
+      </div>
+      <div id="history-loading" class="mt-6 flex-col items-center gap-3 py-10 text-slate-500">
+        <div class="h-8 w-8 animate-spin rounded-full border-4 border-rose-200 border-t-rose-600"></div>
+        <p class="text-xs font-semibold">Memuat riwayat…</p>
+      </div>
+      <div id="history-error" class="mt-6 hidden flex-col items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 p-6 text-center">
+        <p id="history-error-msg" class="text-sm font-semibold text-rose-700"></p>
+        <button id="btn-retry-history" class="rounded-full bg-rose-600 px-4 py-2 text-xs font-bold text-white shadow transition hover:bg-rose-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2">Cuba semula</button>
+      </div>
+      <p id="history-empty" class="mt-6 hidden rounded-2xl border border-dashed border-slate-200 bg-white p-8 text-center text-sm text-slate-500">Belum ada riwayat. Imbas bibir anda dahulu.</p>
+      <ul id="history-list" class="mt-4 space-y-3"></ul>
+    </section>
+  </main>
+
+  <nav class="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur" aria-label="Navigasi utama">
+    <div class="mx-auto grid max-w-md grid-cols-2">
+      <button id="tab-scan" class="flex flex-col items-center gap-1 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500" aria-current="page">
+        <span id="tab-scan-icon" class="flex h-9 w-16 items-center justify-center rounded-full bg-rose-600 text-white transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+        </span>
+        <span id="tab-scan-label" class="text-xs font-bold text-rose-700 transition-colors">Imbas</span>
+      </button>
+      <button id="tab-history" class="flex flex-col items-center gap-1 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">
+        <span id="tab-history-icon" class="flex h-9 w-16 items-center justify-center rounded-full text-slate-400 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </span>
+        <span id="tab-history-label" class="text-xs font-bold text-slate-500 transition-colors">Riwayat</span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="toast" class="pointer-events-none fixed inset-x-0 top-20 z-50 mx-auto w-fit max-w-[90%] rounded-full bg-slate-900 px-4 py-2 text-center text-sm font-semibold text-white opacity-0 shadow-lg transition-opacity duration-300"></div>
+  <p id="announce" class="sr-only" aria-live="polite"></p>
+
+  <script>
+    (function () {
+      var $ = function (id) { return document.getElementById(id); };
+
+      var BACKEND = 'https://script.google.com/macros/s/AKfycbw2WdFEpUikpWJLpvGk7HTJumDveETKmy-GgkR8d6fvtTS8JMVn-eoUnWOCX_DoE_WdEg/exec';
+
+      var CONDITIONS = Object.freeze({
+        DRY: 'Bibir kering / menggelupas',
+        DULL: 'Bibir kusam / gelap',
+        SENSITIVE: 'Bibir sensitif / mudah pedih',
+        NONE: 'Tiada masalah'
+      });
+
+      var THRESHOLDS = Object.freeze({
+        sensitifRedness: 19,
+        kemerahanNormal: 15,
+        textureKering: 14,
+        textureSederhana: 10,
+        flakeRatio: 0.08,
+        kusamLightness: 45,
+        cerahL: 65,
+        specularL: 85
+      });
+
+      var COND_STYLES = {
+        [CONDITIONS.DRY]: { card: 'border-amber-200 bg-amber-50', badge: 'bg-amber-100 text-amber-800' },
+        [CONDITIONS.DULL]: { card: 'border-purple-200 bg-purple-50', badge: 'bg-purple-100 text-purple-800' },
+        [CONDITIONS.SENSITIVE]: { card: 'border-rose-200 bg-rose-50', badge: 'bg-rose-100 text-rose-700' },
+        [CONDITIONS.NONE]: { card: 'border-emerald-200 bg-emerald-50', badge: 'bg-emerald-100 text-emerald-700' }
+      };
+
+      var TAB_ACTIVE_ICON = 'flex h-9 w-16 items-center justify-center rounded-full bg-rose-600 text-white transition-colors';
+      var TAB_IDLE_ICON = 'flex h-9 w-16 items-center justify-center rounded-full text-slate-400 transition-colors';
+      var TAB_ACTIVE_LABEL = 'text-xs font-bold text-rose-700 transition-colors';
+      var TAB_IDLE_LABEL = 'text-xs font-bold text-slate-500 transition-colors';
+
+      var state = { stream: null, cameraActive: false, lastResult: null, saving: false, analyzing: false, saved: false };
+
+      function clamp01(v) { return Math.min(1, Math.max(0, v)); }
+      function showEl(el) { el.classList.remove('hidden'); }
+      function hideEl(el) { el.classList.add('hidden'); }
+
+      function escapeHtml(value) {
+        var d = document.createElement('div');
+        d.textContent = String(value);
+        return d.innerHTML;
+      }
+
+      function num(value) {
+        return typeof value === 'number' && isFinite(value) ? value.toFixed(1) : '–';
+      }
+
+      function formatDate(value) {
+        var d = new Date(value);
+        if (isNaN(d.getTime())) return value;
+        return d.toLocaleString('ms-MY', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      }
+
+      var toastTimer = null;
+      function toast(message, isError) {
+        var el = $('toast');
+        el.textContent = message;
+        el.className = 'pointer-events-none fixed inset-x-0 top-20 z-50 mx-auto w-fit max-w-[90%] rounded-full px-4 py-2 text-center text-sm font-semibold text-white shadow-lg transition-opacity duration-300 ' + (isError ? 'bg-rose-600' : 'bg-slate-900');
+        el.style.opacity = '1';
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { el.style.opacity = '0'; }, 2600);
+      }
+
+      function hasCameraSupport() {
+        return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+      }
+
+      function cameraErrorReason(err) {
+        if (!err || !err.name) return 'Kebenaran kamera ditolak atau kamera tidak tersedia.';
+        switch (err.name) {
+          case 'NotAllowedError':
+          case 'PermissionDeniedError':
+            return 'Kebenaran kamera ditolak. Pilih "Benarkan" pada prompt, kemudian tekan "Cuba semula".';
+          case 'NotFoundError':
+          case 'DevicesNotFoundError':
+            return 'Tiada kamera dikesan pada peranti ini. Cuba peranti dengan kamera, atau muat naik gambar dari galeri.';
+          case 'NotReadableError':
+          case 'TrackStartError':
+            return 'Kamera sedang digunakan aplikasi lain. Tutup app yang guna kamera, kemudian tekan "Cuba semula".';
+          case 'NotSupportedError':
+            return 'Pelantar ini tidak menyokong kamera. Guna muat naik gambar dari galeri.';
+          case 'OverconstrainedError':
+            return 'Kamera tidak dapat dipadankan. Tekan "Cuba semula" atau muat naik gambar.';
+          case 'SecurityError':
+            return 'Kamera disekat pelayar (SecurityError). Pastikan halaman dibuka atas HTTPS, dan tekan "Cuba semula".';
+          default:
+            return err.name + (err.message ? ': ' + err.message : '');
+        }
+      }
+
+      async function openCamera() {
+        if (state.cameraActive) return;
+        var video = $('video');
+        var btn = $('btn-capture');
+        showEl($('camera-loading'));
+        hideEl($('camera-error'));
+        hideEl($('camera-start'));
+        btn.disabled = true;
+        if (!hasCameraSupport()) {
+          failCamera('Pelayar ini tidak menyokong akses kamera. Guna muat naik gambar dari galeri di bawah.');
+          return;
+        }
+        if (window.isSecureContext === false) {
+          failCamera('Halaman ini bukan konteks selamat (HTTPS) — pelayar sekat kamera. Buka URL ini terus dalam pelayar.');
+          return;
+        }
+        var s = null;
+        var lastError = null;
+        try {
+          s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+        } catch (firstError) {
+          lastError = firstError;
+          try {
+            s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+          } catch (secondError) {
+            failCamera(cameraErrorReason(secondError) + ' ');
+            return;
+          }
+        }
+        state.stream = s;
+        video.srcObject = s;
+        state.cameraActive = true;
+        await new Promise(function (resolve) {
+          if (video.readyState >= 2) {
+            resolve();
+            return;
+          }
+          video.addEventListener('loadeddata', resolve, { once: true });
+          setTimeout(resolve, 3000);
+        });
+        await video.play().catch(function () {});
+        hideEl($('camera-loading'));
+        btn.disabled = false;
+      }
+
+      function failCamera(message) {
+        $('camera-error-msg').textContent = message;
+        hideEl($('camera-loading'));
+        showEl($('camera-error'));
+      }
+
+      function stopCamera() {
+        state.cameraActive = false;
+        var video = $('video');
+        if (video.srcObject) {
+          try { video.srcObject.getTracks().forEach(function (t) { t.stop(); }); } catch (err) {}
+          video.srcObject = null;
+        }
+        if (state.stream) {
+          try { state.stream.getTracks().forEach(function (t) { t.stop(); }); } catch (err) {}
+          state.stream = null;
+        }
+      }
+
+      function getCropRect(el, box) {
+        var cw = box.clientWidth;
+        var ch = box.clientHeight;
+        var vw = el.videoWidth || el.naturalWidth;
+        var vh = el.videoHeight || el.naturalHeight;
+        if (!vw || !vh) return null;
+        var scale = Math.max(cw / vw, ch / vh);
+        var dw = vw * scale;
+        var dh = vh * scale;
+        var dx = (cw - dw) / 2;
+        var dy = (ch - dh) / 2;
+        var ow = cw * 0.76;
+        var oh = ch * 0.52;
+        var ox = (cw - ow) / 2;
+        var oy = (ch - oh) / 2;
+        var x0 = Math.max(ox, dx);
+        var y0 = Math.max(oy, dy);
+        var x1 = Math.min(ox + ow, dx + dw);
+        var y1 = Math.min(oy + oh, dy + dh);
+        if (x1 <= x0 || y1 <= y0) return { x: 0, y: 0, w: vw, h: vh };
+        return { x: (x0 - dx) / scale, y: (y0 - dy) / scale, w: (x1 - x0) / scale, h: (y1 - y0) / scale };
+      }
+
+      function drawCrop(el, box) {
+        var rect = getCropRect(el, box);
+        var W = 420;
+        var H = Math.max(1, Math.round((W * rect.h) / rect.w));
+        var canvas = document.createElement('canvas');
+        canvas.width = W;
+        canvas.height = H;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(el, rect.x, rect.y, rect.w, rect.h, 0, 0, W, H);
+        return canvas;
+      }
+
+      function analyzeCanvas(canvas) {
+        var w = canvas.width;
+        var h = canvas.height;
+        var ctx = canvas.getContext('2d', { willReadFrequently: true });
+        var img = ctx.getImageData(0, 0, w, h);
+        var px = img.data;
+        var n = w * h;
+
+        var lut = new Float32Array(256);
+        for (var i = 0; i < 256; i++) {
+          var c = i / 255;
+          lut[i] = c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+        }
+
+        function f(t) { return t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116; }
+        var L = new Float32Array(n);
+        var A = new Float32Array(n);
+
+        for (i = 0; i < n; i++) {
+          var o = i * 4;
+          var r = lut[px[o]];
+          var g = lut[px[o + 1]];
+          var b = lut[px[o + 2]];
+          var x = (0.4124564 * r + 0.3575761 * g + 0.1804375 * b) / 0.95047;
+          var y = 0.2126729 * r + 0.7151522 * g + 0.072175 * b;
+          var z = (0.0193339 * r + 0.119192 * g + 0.9503041 * b) / 1.08883;
+          var fx = f(x);
+          var fy = f(y);
+          var fz = f(z);
+          L[i] = 116 * fy - 16;
+          A[i] = 500 * (fx - fy);
+        }
+
+        var cx = (w - 1) / 2;
+        var cy = (h - 1) / 2;
+        var rx = w / 2;
+        var ry = h / 2;
+
+        var skinSumL = 0, skinSumA = 0, skinCnt = 0, ellSumL = 0, ellSumA = 0, ellCnt = 0;
+
+        for (var yy = 0; yy < h; yy++) {
+          for (var xx = 0; xx < w; xx++) {
+            var ii = yy * w + xx;
+            var u = (xx - cx) / rx;
+            var v = (yy - cy) / ry;
+            if (u * u + v * v > 1) continue;
+            var ll = L[ii];
+            var aa = A[ii];
+            if (ll < 15 || ll > 95) continue;
+            ellSumL += ll;
+            ellSumA += aa;
+            ellCnt++;
+            if (yy < h * 0.3) {
+              skinSumL += ll;
+              skinSumA += aa;
+              skinCnt++;
+            }
+          }
+        }
+
+        var skinL, skinA;
+        if (skinCnt >= 20) {
+          skinL = skinSumL / skinCnt;
+          skinA = skinSumA / skinCnt;
+        } else if (ellCnt >= 20) {
+          skinL = ellSumL / ellCnt;
+          skinA = ellSumA / ellCnt;
+        } else {
+          return null;
+        }
+
+        var lip = new Uint8Array(n);
+        var lipCnt = 0, regCnt = 0, sumL = 0, sumA = 0, sumA2 = 0, flake = 0;
+
+        for (yy = Math.floor(h * 0.35); yy < h; yy++) {
+          for (xx = 0; xx < w; xx++) {
+            ii = yy * w + xx;
+            u = (xx - cx) / rx;
+            v = (yy - cy) / ry;
+            if (u * u + v * v > 1) continue;
+            ll = L[ii];
+            aa = A[ii];
+            if (ll < 18 || ll > 92) continue;
+            regCnt++;
+            if (aa > skinA + 5 || ll < skinL - 7) {
+              lip[ii] = 1;
+              lipCnt++;
+              sumL += ll;
+              sumA += aa;
+              sumA2 += aa * aa;
+              if (ll > 78) flake++;
+            }
+          }
+        }
+
+        if (lipCnt < Math.max(30, regCnt * 0.02)) return null;
+
+        var lapMean = 0, lapCnt = 0;
+        for (yy = 1; yy < h - 1; yy++) {
+          for (xx = 1; xx < w - 1; xx++) {
+            ii = yy * w + xx;
+            if (!lip[ii]) continue;
+            lapMean += 4 * L[ii] - L[ii - 1] - L[ii + 1] - L[ii - w] - L[ii + w];
+            lapCnt++;
+          }
+        }
+        if (lapCnt === 0) return null;
+        lapMean /= lapCnt;
+
+        var lapVar = 0;
+        for (yy = 1; yy < h - 1; yy++) {
+          for (xx = 1; xx < w - 1; xx++) {
+            ii = yy * w + xx;
+            if (!lip[ii]) continue;
+            var dd = 4 * L[ii] - L[ii - 1] - L[ii + 1] - L[ii - w] - L[ii + w] - lapMean;
+            lapVar += dd * dd;
+          }
+        }
+
+        var texture = Math.sqrt(lapVar / lapCnt);
+        var lightness = sumL / lipCnt;
+        var redness = sumA / lipCnt;
+        var rednessStd = Math.sqrt(Math.max(0, sumA2 / lipCnt - redness * redness));
+        var flakeRatio = flake / lipCnt;
+        var lipPixelRatio = regCnt > 0 ? lipCnt / regCnt : 0;
+
+        return classify({ lightness: lightness, texture: texture, redness: redness, rednessStd: rednessStd, flakeRatio: flakeRatio, lipPixelRatio: lipPixelRatio });
+      }
+
+      function classify(m) {
+        var condition, confidence;
+        if (m.redness >= THRESHOLDS.sensitifRedness) {
+          condition = CONDITIONS.SENSITIVE;
+          confidence = 0.5 + 0.45 * clamp01((m.redness - THRESHOLDS.sensitifRedness) / 8);
+        } else if (m.texture >= THRESHOLDS.textureKering || (m.texture >= THRESHOLDS.textureSederhana && m.flakeRatio >= THRESHOLDS.flakeRatio)) {
+          condition = CONDITIONS.DRY;
+          var tScore = clamp01((m.texture - THRESHOLDS.textureKering) / 12);
+          var fScore = m.flakeRatio >= THRESHOLDS.flakeRatio ? clamp01((m.flakeRatio - THRESHOLDS.flakeRatio) / 0.2) : 0;
+          confidence = 0.5 + 0.45 * Math.max(tScore, fScore);
+        } else if (m.lightness <= THRESHOLDS.kusamLightness) {
+          condition = CONDITIONS.DULL;
+          confidence = 0.5 + 0.45 * clamp01((THRESHOLDS.kusamLightness - m.lightness) / 12);
+        } else {
+          condition = CONDITIONS.NONE;
+          var dR = clamp01((THRESHOLDS.sensitifRedness - m.redness) / 10);
+          var dT = clamp01((THRESHOLDS.textureKering - m.texture) / 10);
+          var dL = clamp01((m.lightness - THRESHOLDS.kusamLightness) / 12);
+          confidence = 0.55 + 0.4 * Math.min(dR, dT, dL);
+        }
+
+        var finalConfidence = Math.min(0.95, Math.max(0.5, confidence));
+        var metrics = {};
+        for (var key in m) metrics[key] = m[key];
+        metrics.thresholds = THRESHOLDS;
+        return { condition: condition, confidence: finalConfidence, metrics: metrics };
+      }
+
+      function buildReasons(m) {
+        var pct = Math.round(m.flakeRatio * 100);
+        return {
+          lightness: m.lightness <= THRESHOLDS.kusamLightness
+            ? 'L* purata ' + m.lightness.toFixed(1) + ' (rendah <' + THRESHOLDS.kusamLightness + ') — bibir nampak kusam/gelap.'
+            : 'L* purata ' + m.lightness.toFixed(1) + ' — kecerahan bibir normal (≥' + THRESHOLDS.kusamLightness + ').',
+          texture: m.texture >= THRESHOLDS.textureKering
+            ? 'Tekstur kasar (variance Laplacian ' + m.texture.toFixed(1) + ', ≥' + THRESHOLDS.textureKering + ') — tanda kering/menggelupas.' + (m.flakeRatio >= THRESHOLDS.flakeRatio ? ' ' + pct + '% piksel cerah dikesan (serpihan kulit).' : '')
+            : m.flakeRatio >= THRESHOLDS.flakeRatio
+              ? 'Tekstur normal tetapi ' + pct + '% piksel cerah (serpihan) dikesan — kulit bibir mula menggelupas.'
+              : 'Tekstur bibir halus (variance Laplacian ' + m.texture.toFixed(1) + ') — permukaan normal.',
+          redness: m.redness >= THRESHOLDS.sensitifRedness
+            ? 'Kemerahan tinggi (a* ' + m.redness.toFixed(1) + ', ≥' + THRESHOLDS.sensitifRedness + ') — mungkin sensitif/meradang.'
+            : 'Kemerahan normal (a* ' + m.redness.toFixed(1) + ', <' + THRESHOLDS.sensitifRedness + ') — tiada tanda keradangan.'
+        };
+      }
+
+      function tagStyleFor(tag) {
+        if (tag === 'Kusam') return 'bg-purple-100 text-purple-700';
+        if (tag === 'Cerah' || tag === 'Halus' || tag === 'Normal') return 'bg-emerald-100 text-emerald-700';
+        if (tag === 'Sederhana' || tag === 'Meningkat') return 'bg-amber-100 text-amber-700';
+        return 'bg-rose-100 text-rose-700';
+      }
+
+      function setMetric(key, value, max, tag, fillClass, reason) {
+        var pctVal = Math.min(100, Math.max(0, (value / max) * 100));
+        $('m-' + key + '-value').textContent = value.toFixed(1);
+        $('m-' + key + '-tag').textContent = tag;
+        $('m-' + key + '-tag').className = 'rounded-full px-2 py-0.5 text-xs font-bold ' + tagStyleFor(tag);
+        $('m-' + key + '-fill').style.width = pctVal + '%';
+        $('m-' + key + '-fill').className = 'h-full rounded-full transition-all duration-500 ' + fillClass;
+        $('m-' + key + '-reason').textContent = reason;
+      }
+
+      function showResult(canvas, analysis) {
+        state.lastResult = analysis;
+        state.saved = false;
+
+        var m = analysis.metrics;
+        var st = COND_STYLES[analysis.condition];
+
+        $('result-img').src = canvas.toDataURL('image/jpeg', 0.85);
+        $('result-preview-box').style.aspectRatio = canvas.width + ' / ' + canvas.height;
+
+        var card = $('cond-card');
+        card.className = 'mt-4 rounded-3xl border p-5 shadow-sm ' + st.card;
+        var badge = $('cond-badge');
+        badge.className = 'inline-flex items-center rounded-full px-3 py-1 text-xs font-bold ' + st.badge;
+        badge.textContent = analysis.condition;
+
+        var conf = Math.round(analysis.confidence * 100);
+        $('conf-pct').textContent = conf + '%';
+        $('conf-bar').style.width = conf + '%';
+
+        var reasons = buildReasons(m);
+        var lightnessTag = m.lightness <= THRESHOLDS.kusamLightness ? 'Kusam' : m.lightness >= THRESHOLDS.cerahL ? 'Cerah' : 'Normal';
+        setMetric('light', m.lightness, 100, lightnessTag, lightnessTag === 'Kusam' ? 'bg-purple-500' : lightnessTag === 'Cerah' ? 'bg-emerald-500' : 'bg-slate-400', reasons.lightness);
+        var textureTag = m.texture >= THRESHOLDS.textureKering ? 'Kasar' : m.texture >= THRESHOLDS.textureSederhana ? 'Sederhana' : 'Halus';
+        setMetric('texture', m.texture, 40, textureTag, textureTag === 'Kasar' ? 'bg-rose-500' : textureTag === 'Sederhana' ? 'bg-amber-500' : 'bg-emerald-500', reasons.texture);
+        var rednessTag = m.redness >= THRESHOLDS.sensitifRedness ? 'Tinggi' : m.redness >= THRESHOLDS.kemerahanNormal ? 'Meningkat' : 'Normal';
+        setMetric('redness', m.redness, 40, rednessTag, rednessTag === 'Tinggi' ? 'bg-rose-600' : rednessTag === 'Meningkat' ? 'bg-amber-500' : 'bg-emerald-500', reasons.redness);
+
+        $('save-status').textContent = '';
+        var btn = $('btn-save');
+        btn.textContent = 'Simpan ke riwayat';
+        btn.disabled = false;
+
+        stopCamera();
+        showScreen('result');
+        $('announce').textContent = 'Keputusan: ' + analysis.condition + '. Keyakinan ' + conf + ' peratus.';
+      }
+
+      var screens = { camera: $('screen-camera'), result: $('screen-result'), history: $('screen-history') };
+
+      function showScreen(name) {
+        Object.keys(screens).forEach(function (key) {
+          screens[key].classList.toggle('hidden', key !== name);
+        });
+      }
+
+      function setActiveTab(name) {
+        var isScan = name === 'scan';
+        $('tab-scan-icon').className = isScan ? TAB_ACTIVE_ICON : TAB_IDLE_ICON;
+        $('tab-history-icon').className = isScan ? TAB_IDLE_ICON : TAB_ACTIVE_ICON;
+        $('tab-scan-label').className = isScan ? TAB_ACTIVE_LABEL : TAB_IDLE_LABEL;
+        $('tab-history-label').className = isScan ? TAB_IDLE_LABEL : TAB_ACTIVE_LABEL;
+        if (isScan) {
+          $('tab-scan').setAttribute('aria-current', 'page');
+          $('tab-history').removeAttribute('aria-current');
+        } else {
+          $('tab-history').setAttribute('aria-current', 'page');
+          $('tab-scan').removeAttribute('aria-current');
+        }
+      }
+
+      function goCamera() {
+        showScreen('camera');
+        setActiveTab('scan');
+        stopCamera();
+        openCamera();
+      }
+
+      function goResult() {
+        showScreen('result');
+        setActiveTab('scan');
+        stopCamera();
+      }
+
+      function goHistory() {
+        showScreen('history');
+        setActiveTab('history');
+        stopCamera();
+        loadHistory();
+      }
+
+      function analyze(canvas) {
+        if (state.analyzing) return;
+        state.analyzing = true;
+        showEl($('analyzing'));
+        setTimeout(function () {
+          var analysis = null;
+          try {
+            analysis = analyzeCanvas(canvas);
+          } catch (err) {
+            analysis = null;
+          }
+          hideEl($('analyzing'));
+          state.analyzing = false;
+          if (!analysis) {
+            toast('Bibir tidak dikesan dalam bingkai. Pastikan bibir berada dalam oval dan cahaya mencukupi.', true);
+            goCamera();
+            return;
+          }
+          showResult(canvas, analysis);
+        }, 30);
+      }
+
+      function jsonpCleanup_(name) {
+        try { delete window[name]; } catch (e) { window[name] = undefined; }
+        var s = document.getElementById('jsonp-script');
+        if (s && s.parentNode) s.parentNode.removeChild(s);
+      }
+
+      function jsonp_(params, cb, errCb) {
+        var f = 'cb' + Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36);
+        window[f] = function (data) {
+          jsonpCleanup_(f);
+          if (cb) cb(data);
+        };
+        var s = document.createElement('script');
+        s.id = 'jsonp-script';
+        s.src = BACKEND + '?' + params + '&callback=' + f;
+        s.onerror = function () {
+          jsonpCleanup_(f);
+          if (errCb) errCb();
+        };
+        document.body.appendChild(s);
+      }
+
+      function saveScan() {
+        if (state.saving || !state.lastResult || state.saved) return;
+        state.saving = true;
+        var btn = $('btn-save');
+        btn.disabled = true;
+        var label = btn.textContent;
+        btn.textContent = 'Menyimpan…';
+        var status = $('save-status');
+        status.className = 'mt-3 text-center text-sm font-semibold text-slate-600';
+        status.textContent = 'Menyimpan ke riwayat…';
+        var payload = state.lastResult;
+        var params = 'action=save' +
+          '&condition=' + encodeURIComponent(payload.condition) +
+          '&confidence=' + encodeURIComponent(payload.confidence) +
+          '&metrics=' + encodeURIComponent(JSON.stringify(payload.metrics || {}));
+        jsonp_(params, function (data) {
+          state.saving = false;
+          if (data && data.ok) {
+            state.saved = true;
+            status.className = 'mt-3 text-center text-sm font-semibold text-emerald-700';
+            status.textContent = 'Disimpan ke riwayat.';
+            btn.textContent = 'Disimpan';
+            toast('Disimpan ke riwayat.');
+          } else {
+            var msg = data && data.error ? data.error : 'Ralat menyimpan.';
+            status.className = 'mt-3 text-center text-sm font-semibold text-rose-700';
+            status.textContent = msg;
+            btn.disabled = false;
+            btn.textContent = label;
+          }
+        }, function () {
+          state.saving = false;
+          status.className = 'mt-3 text-center text-sm font-semibold text-rose-700';
+          status.textContent = 'Ralat sambungan ke pelayan. Semak internet dan cuba lagi.';
+          btn.disabled = false;
+          btn.textContent = label;
+        });
+      }
+
+      function loadHistory() {
+        hideEl($('history-error'));
+        hideEl($('history-empty'));
+        $('history-list').innerHTML = '';
+        showEl($('history-loading'));
+        jsonp_('action=list', function (data) {
+          hideEl($('history-loading'));
+          if (!data || !data.ok) {
+            $('history-error-msg').textContent = data && data.error ? data.error : 'Ralat memuat riwayat.';
+            showEl($('history-error'));
+            return;
+          }
+          var list = data.scans || [];
+          if (!list.length) {
+            $('history-count').textContent = '';
+            showEl($('history-empty'));
+            return;
+          }
+          $('history-count').textContent = list.length + ' rekod';
+          renderHistory(list);
+        }, function () {
+          hideEl($('history-loading'));
+          $('history-error-msg').textContent = 'Ralat sambungan ke pelayan. Semak internet dan cuba lagi.';
+          showEl($('history-error'));
+        });
+      }
+
+      function renderHistory(list) {
+        var items = list.map(function (s) {
+          var m = s.metrics || {};
+          var st = COND_STYLES[s.condition] || COND_STYLES[CONDITIONS.NONE];
+          var conf = Math.round((s.confidence || 0) * 100);
+          var date = formatDate(s.created_at);
+          var hasMetrics = m && (typeof m.lightness === 'number' || typeof m.redness === 'number');
+          var brief = hasMetrics
+            ? 'L* ' + num(m.lightness) + ' · a* ' + num(m.redness) + ' · tekstur ' + num(m.texture)
+            : 'tiada metrik';
+          return '<li class="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">' +
+            '<div class="flex items-center justify-between gap-2">' +
+            '<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ' + st.badge + '">' + escapeHtml(s.condition) + '</span>' +
+            '<span class="text-xs font-extrabold text-slate-800">' + conf + '%</span>' +
+            '</div>' +
+            '<div class="mt-2 flex items-center justify-between gap-2 text-xs text-slate-500">' +
+            '<span>' + date + '</span>' +
+            '<span class="truncate">' + escapeHtml(brief) + '</span>' +
+            '</div>' +
+            '</li>';
+        });
+        $('history-list').innerHTML = items.join('');
+      }
+
+      function handleFileChange(event) {
+        var file = event.target.files && event.target.files[0];
+        if (!file) return;
+        event.target.value = '';
+        var url = URL.createObjectURL(file);
+        var img = new Image();
+        img.onload = function () {
+          URL.revokeObjectURL(url);
+          if (!state.analyzing) analyze(drawCrop(img, $('camera-box')));
+        };
+        img.onerror = function () {
+          URL.revokeObjectURL(url);
+          toast('Fail imej tidak boleh dibaca.', true);
+        };
+        img.src = url;
+      }
+      Array.prototype.forEach.call(document.querySelectorAll('input[type=file]'), function (inp) {
+        inp.addEventListener('change', handleFileChange);
+      });
+
+      $('btn-capture').addEventListener('click', function () {
+        var video = $('video');
+        if (!state.cameraActive || !video.videoWidth || state.analyzing) return;
+        var canvas = drawCrop(video, $('camera-box'));
+        stopCamera();
+        analyze(canvas);
+      });
+
+      $('btn-start-camera').addEventListener('click', function () {
+        hideEl($('camera-start'));
+        openCamera();
+      });
+      $('btn-retry-camera').addEventListener('click', openCamera);
+      $('btn-rescan').addEventListener('click', goCamera);
+      $('btn-save').addEventListener('click', saveScan);
+      $('tab-scan').addEventListener('click', goCamera);
+      $('tab-history').addEventListener('click', goHistory);
+      $('btn-history-load').addEventListener('click', loadHistory);
+      $('btn-retry-history').addEventListener('click', loadHistory);
+
+      function init() {
+        showScreen('camera');
+        setActiveTab('scan');
+        if (!hasCameraSupport()) {
+          failCamera('Pelayar ini tidak menyokong akses kamera. Guna muat naik gambar dari galeri di bawah.');
+          return;
+        }
+        showEl($('camera-start'));
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
