@@ -34,9 +34,10 @@
     <section id="screen-camera" aria-label="Skrin kamera">
       <div id="camera-box" class="relative aspect-[3/4] w-full overflow-hidden rounded-3xl bg-slate-900 shadow-lg ring-1 ring-slate-900/10">
         <video id="video" autoplay playsinline muted class="absolute inset-0 h-full w-full object-cover" aria-label="Pratonton kamera"></video>
-        <svg class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 200 240" fill="none" aria-hidden="true" style="width: 74%; height: 80%;">
-          <path d="M 100 18 C 148 18 178 62 178 108 C 178 148 154 182 120 198 C 113 201 87 201 80 198 C 46 182 22 148 22 108 C 22 62 52 18 100 18 Z" stroke="rgba(255,255,255,0.95)" stroke-width="2" stroke-dasharray="8 6" stroke-linecap="round" fill="rgba(255,255,255,0.08)"/>
-          <path d="M 30 208 C 36 232 66 242 100 242 C 134 242 164 232 170 208" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-dasharray="8 6" stroke-linecap="round" fill="none"/>
+        <svg class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 200 240" fill="none" aria-hidden="true" style="width: 76%; height: 68%;">
+          <path d="M 100 16 C 146 16 176 54 176 102 C 176 148 150 182 118 198 C 111 201 89 201 82 198 C 50 182 24 148 24 102 C 24 54 54 16 100 16 Z" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-dasharray="9 7" stroke-linecap="round" fill="none"/>
+          <path d="M 26 206 C 32 234 64 244 100 244 C 136 244 168 234 174 206" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-dasharray="9 7" stroke-linecap="round" fill="none"/>
+          <path d="M 58 150 C 70 130 88 122 94 124 C 97 125 99 129 100 131 C 101 129 103 125 106 124 C 112 122 130 130 142 150 C 130 166 110 172 100 172 C 90 172 70 166 58 150 Z" stroke="rgba(255,255,255,0.95)" stroke-width="2" stroke-dasharray="6 5" stroke-linecap="round" fill="rgba(225,29,72,0.28)"/>
         </svg>
         <div class="pointer-events-none absolute inset-x-6 top-6 rounded-full bg-black/40 px-3 py-1 text-center text-[11px] font-semibold text-white/90 backdrop-blur-sm" aria-hidden="true">Letakkan wajah dalam bingkai</div>
         <div id="camera-loading" class="absolute inset-0 z-10 hidden flex-col items-center justify-center gap-3 bg-slate-900/70 text-white">
@@ -79,9 +80,10 @@
     <section id="screen-result" class="hidden" aria-label="Skrin keputusan">
       <div id="result-preview-box" class="relative w-full overflow-hidden rounded-3xl bg-slate-900 shadow-lg ring-1 ring-slate-900/10" style="aspect-ratio: 10 / 9">
         <img id="result-img" alt="Gambar bibir yang dianalisis" class="absolute inset-0 h-full w-full object-cover">
-        <svg class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 200 240" fill="none" aria-hidden="true" style="width: 74%; height: 80%;">
-          <path d="M 100 18 C 148 18 178 62 178 108 C 178 148 154 182 120 198 C 113 201 87 201 80 198 C 46 182 22 148 22 108 C 22 62 52 18 100 18 Z" stroke="rgba(255,255,255,0.95)" stroke-width="2" stroke-dasharray="8 6" stroke-linecap="round" fill="rgba(255,255,255,0.08)"/>
-          <path d="M 30 208 C 36 232 66 242 100 242 C 134 242 164 232 170 208" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-dasharray="8 6" stroke-linecap="round" fill="none"/>
+        <svg class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 200 240" fill="none" aria-hidden="true" style="width: 76%; height: 68%;">
+          <path d="M 100 16 C 146 16 176 54 176 102 C 176 148 150 182 118 198 C 111 201 89 201 82 198 C 50 182 24 148 24 102 C 24 54 54 16 100 16 Z" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-dasharray="9 7" stroke-linecap="round" fill="none"/>
+          <path d="M 26 206 C 32 234 64 244 100 244 C 136 244 168 234 174 206" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-dasharray="9 7" stroke-linecap="round" fill="none"/>
+          <path d="M 58 150 C 70 130 88 122 94 124 C 97 125 99 129 100 131 C 101 129 103 125 106 124 C 112 122 130 130 142 150 C 130 166 110 172 100 172 C 90 172 70 166 58 150 Z" stroke="rgba(255,255,255,0.95)" stroke-width="2" stroke-dasharray="6 5" stroke-linecap="round" fill="rgba(225,29,72,0.28)"/>
         </svg>
         <div class="pointer-events-none absolute inset-x-6 bottom-3 rounded-full bg-black/40 px-3 py-1 text-center text-[11px] font-semibold text-white/90 backdrop-blur-sm" aria-hidden="true">Bingkai yang dianalisis</div>
       </div>
