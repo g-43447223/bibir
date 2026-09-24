@@ -107,6 +107,15 @@
         <div class="pointer-events-none absolute inset-x-6 bottom-3 rounded-full bg-black/40 px-3 py-1 text-center text-[11px] font-semibold text-white/90 backdrop-blur-sm" aria-hidden="true">Bingkai yang dianalisis</div>
       </div>
 
+      <div id="grade-card" class="mt-4 flex items-center gap-4 rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 p-4 shadow-sm">
+        <div id="grade-medal" class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-amber-300 to-yellow-500 text-2xl font-extrabold text-white shadow-lg ring-4 ring-amber-200">-</div>
+        <div class="min-w-0">
+          <p class="text-[11px] font-bold uppercase tracking-wider text-orange-600">Gred kesihatan bibir</p>
+          <p id="grade-label" class="truncate text-base font-extrabold text-slate-800">-</p>
+          <p class="text-xs font-medium text-slate-500">Skor kesihatan: <span id="grade-score" class="font-bold text-slate-700">-</span>/100</p>
+        </div>
+      </div>
+
       <article id="cond-card" class="mt-4 rounded-3xl border border-slate-100 bg-white p-5 shadow-sm">
         <div class="flex items-center justify-between gap-2">
           <span id="cond-badge" class="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold">â€“</span>
@@ -641,6 +650,26 @@
         $('m-' + key + '-reason').textContent = reason;
       }
 
+      function lipHealthScore(m) {
+        var s = 100;
+        if (m.lightness < THRESHOLDS.kusamLightness) s -= Math.min(25, (THRESHOLDS.kusamLightness - m.lightness) * 1.8);
+        else if (m.lightness < THRESHOLDS.cerahL) s -= Math.round((THRESHOLDS.cerahL - m.lightness) * 0.3);
+        if (m.texture >= THRESHOLDS.textureKering) s -= Math.min(25, (m.texture - THRESHOLDS.textureKering) * 2.2);
+        else if (m.texture >= THRESHOLDS.textureSederhana) s -= Math.round((m.texture - THRESHOLDS.textureSederhana) * 1.6);
+        if (m.redness >= THRESHOLDS.sensitifRedness) s -= Math.min(30, (m.redness - THRESHOLDS.sensitifRedness) * 2.6);
+        else if (m.redness >= THRESHOLDS.kemerahanNormal) s -= Math.round((m.redness - THRESHOLDS.kemerahanNormal) * 1.4);
+        if (m.flakeRatio >= THRESHOLDS.flakeRatio) s -= 12;
+        return Math.max(5, Math.min(100, Math.round(s)));
+      }
+
+      function gradeFor(score) {
+        if (score >= 85) return { g: 'A', label: 'Cemerlang', medal: 'bg-gradient-to-br from-amber-300 to-yellow-500', ring: 'ring-amber-200' };
+        if (score >= 70) return { g: 'B', label: 'Baik', medal: 'bg-gradient-to-br from-emerald-400 to-teal-500', ring: 'ring-emerald-200' };
+        if (score >= 55) return { g: 'C', label: 'Sederhana', medal: 'bg-gradient-to-br from-sky-400 to-blue-500', ring: 'ring-sky-200' };
+        if (score >= 40) return { g: 'D', label: 'Kurang', medal: 'bg-gradient-to-br from-orange-400 to-orange-600', ring: 'ring-orange-200' };
+        return { g: 'E', label: 'Perlu Perhatian', medal: 'bg-gradient-to-br from-red-400 to-red-600', ring: 'ring-red-200' };
+      }
+
       function showResult(canvas, analysis) {
         state.lastResult = analysis;
         state.saved = false;
@@ -660,6 +689,13 @@
         var conf = Math.round(analysis.confidence * 100);
         $('conf-pct').textContent = conf + '%';
         $('conf-bar').style.width = conf + '%';
+
+        var score = lipHealthScore(m);
+        var grade = gradeFor(score);
+        $('grade-medal').textContent = grade.g;
+        $('grade-medal').className = 'flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-2xl font-extrabold text-white shadow-lg ring-4 ' + grade.ring + ' ' + grade.medal;
+        $('grade-label').textContent = 'Gred ' + grade.g + ' - ' + grade.label;
+        $('grade-score').textContent = score;
 
         var reasons = buildReasons(m);
         var lightnessTag = m.lightness <= THRESHOLDS.kusamLightness ? 'Kusam' : m.lightness >= THRESHOLDS.cerahL ? 'Cerah' : 'Normal';
