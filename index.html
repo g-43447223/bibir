@@ -21,6 +21,13 @@
       }
     };
   </script>
+  <style>
+    .popup-card { animation: pop-in 0.3s ease-out both; }
+    @keyframes pop-in {
+      from { opacity: 0; transform: scale(0.92) translateY(12px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+  </style>
 </head>
 <body class="min-h-screen bg-orange-50 font-sans text-slate-800 antialiased">
   <header class="fixed inset-x-0 top-0 z-40 bg-gradient-to-r from-orange-500 to-amber-400 text-white shadow-md">
@@ -81,8 +88,16 @@
       <p class="mt-3 text-center text-xs leading-relaxed text-slate-500">Letakkan wajah anda dalam bingkai â€” bibir akan dikesan automatik. Keringkan peluh dan gunakan cahaya yang mencukupi.</p>
       </section>
 
-    <section id="screen-result" class="hidden" aria-label="Skrin keputusan">
-      <div id="result-preview-box" class="relative w-full overflow-hidden rounded-3xl bg-slate-900 shadow-lg ring-1 ring-slate-900/10" style="aspect-ratio: 10 / 9">
+    <section id="screen-result" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/70 p-4 backdrop-blur-sm" aria-label="Pop-up keputusan">
+      <div class="popup-card relative flex max-h-[86vh] w-full max-w-md flex-col overflow-hidden rounded-3xl bg-white shadow-2xl">
+        <header class="flex items-center justify-between gap-2 border-b border-slate-100 px-5 py-3.5">
+          <h2 class="text-base font-extrabold text-slate-800">Keputusan Bibir</h2>
+          <button id="btn-close-result" type="button" class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500" aria-label="Tutup pop-up">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+          </button>
+        </header>
+        <div class="overflow-y-auto px-5 py-5">
+          <div id="result-preview-box" class="relative w-full overflow-hidden rounded-3xl bg-slate-900 shadow-lg ring-1 ring-slate-900/10" style="aspect-ratio: 10 / 9">
         <img id="result-img" alt="Gambar bibir yang dianalisis" class="absolute inset-0 h-full w-full object-cover">
         <svg class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 200 240" fill="none" aria-hidden="true" style="width: 76%; height: 68%;">
           <path d="M 100 16 C 146 16 176 54 176 102 C 176 148 150 182 118 198 C 111 201 89 201 82 198 C 50 182 24 148 24 102 C 24 54 54 16 100 16 Z" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-dasharray="9 7" stroke-linecap="round" fill="none"/>
@@ -157,6 +172,8 @@
         <button id="btn-save" class="rounded-2xl bg-orange-500 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">Simpan ke riwayat</button>
       </div>
       <p id="save-status" aria-live="polite" class="mt-3 text-center text-sm font-semibold text-slate-600"></p>
+        </div>
+      </div>
     </section>
 
     <section id="screen-history" class="hidden" aria-label="Skrin riwayat">
@@ -877,6 +894,7 @@
       $('btn-cam-front').addEventListener('click', function () { setCameraMode('user'); });
       $('btn-retry-camera').addEventListener('click', openCamera);
       $('btn-rescan').addEventListener('click', goCamera);
+      $('btn-close-result').addEventListener('click', goCamera);
       $('btn-save').addEventListener('click', saveScan);
       $('tab-scan').addEventListener('click', goCamera);
       $('tab-history').addEventListener('click', goHistory);
