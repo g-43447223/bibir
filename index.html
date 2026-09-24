@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Kesan Condition Bibir</title>
-  <meta name="theme-color" content="#e11d48">
+  <meta name="theme-color" content="#f97316">
   <meta name="description" content="Analisis kondisi bibir: kering, kusam, sensitif, atau sihat terus dari kamera anda.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,11 +22,11 @@
     };
   </script>
 </head>
-<body class="min-h-screen bg-rose-50 font-sans text-slate-800 antialiased">
-  <header class="fixed inset-x-0 top-0 z-40 bg-gradient-to-r from-rose-600 to-pink-500 text-white shadow-md">
+<body class="min-h-screen bg-orange-50 font-sans text-slate-800 antialiased">
+  <header class="fixed inset-x-0 top-0 z-40 bg-gradient-to-r from-orange-500 to-amber-400 text-white shadow-md">
     <div class="mx-auto max-w-md px-4 pb-2.5 pt-[calc(env(safe-area-inset-top)+0.8rem)]">
       <h1 class="truncate text-base font-extrabold leading-tight sm:text-lg">Kesan Condition Bibir</h1>
-      <p class="truncate text-[11px] font-medium text-rose-100">Analisis keadaan bibir anda terus dari kamera</p>
+      <p class="truncate text-[11px] font-medium text-orange-100">Analisis keadaan bibir anda terus dari kamera</p>
     </div>
   </header>
 
@@ -37,20 +37,20 @@
         <svg class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 200 240" fill="none" aria-hidden="true" style="width: 76%; height: 68%;">
           <path d="M 100 16 C 146 16 176 54 176 102 C 176 148 150 182 118 198 C 111 201 89 201 82 198 C 50 182 24 148 24 102 C 24 54 54 16 100 16 Z" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-dasharray="9 7" stroke-linecap="round" fill="none"/>
           <path d="M 26 206 C 32 234 64 244 100 244 C 136 244 168 234 174 206" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-dasharray="9 7" stroke-linecap="round" fill="none"/>
-          <path d="M 58 150 C 70 130 88 122 94 124 C 97 125 99 129 100 131 C 101 129 103 125 106 124 C 112 122 130 130 142 150 C 130 166 110 172 100 172 C 90 172 70 166 58 150 Z" stroke="rgba(255,255,255,0.95)" stroke-width="2" stroke-dasharray="6 5" stroke-linecap="round" fill="rgba(225,29,72,0.28)"/>
+          <path d="M 58 150 C 70 130 88 122 94 124 C 97 125 99 129 100 131 C 101 129 103 125 106 124 C 112 122 130 130 142 150 C 130 166 110 172 100 172 C 90 172 70 166 58 150 Z" stroke="rgba(255,255,255,0.95)" stroke-width="2" stroke-dasharray="6 5" stroke-linecap="round" fill="rgba(251,146,60,0.30)"/>
         </svg>
         <div class="pointer-events-none absolute inset-x-6 top-6 rounded-full bg-black/40 px-3 py-1 text-center text-[11px] font-semibold text-white/90 backdrop-blur-sm" aria-hidden="true">Letakkan wajah dalam bingkai</div>
         <div id="camera-loading" class="absolute inset-0 z-10 hidden flex-col items-center justify-center gap-3 bg-slate-900/70 text-white">
           <div class="h-10 w-10 animate-spin rounded-full border-4 border-white/20 border-t-white"></div>
-          <p class="text-sm font-semibold">Menyediakan kamera…</p>
+          <p class="text-sm font-semibold">Menyediakan kameraâ€¦</p>
         </div>
         <div id="camera-start" class="absolute inset-0 z-10 hidden flex-col items-center justify-center gap-3 bg-slate-900/90 p-6 text-center text-white">
-          <button id="btn-start-camera" class="rounded-full bg-rose-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-rose-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Mula Kamera</button>
+          <button id="btn-start-camera" class="rounded-full bg-orange-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Mula Kamera</button>
           <div id="camera-mode" class="flex items-center gap-1 rounded-full bg-white/10 p-1 ring-1 ring-white/25" role="group" aria-label="Pilih kamera">
             <button id="btn-cam-back" type="button" class="rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-900 shadow transition" aria-pressed="true">Kamera belakang</button>
             <button id="btn-cam-front" type="button" class="rounded-full px-4 py-2 text-xs font-bold text-white/80 transition" aria-pressed="false">Kamera depan</button>
           </div>
-          <label class="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-800 shadow transition hover:bg-rose-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-rose-400 focus-within:ring-offset-2 focus-within:ring-offset-slate-900">
+          <label class="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-800 shadow transition hover:bg-orange-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-orange-400 focus-within:ring-offset-2 focus-within:ring-offset-slate-900">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
             Pilih gambar dari galeri
             <input type="file" id="file-input" accept="image/*" class="sr-only">
@@ -58,23 +58,23 @@
           <p class="text-xs leading-relaxed text-slate-300">Sentuh untuk buka kamera, atau muat naik gambar wajah anda.</p>
         </div>
         <div id="camera-error" class="absolute inset-0 z-10 hidden flex-col items-center justify-center gap-3 bg-slate-900/90 p-6 text-center text-white">
-          <div class="flex h-12 w-12 items-center justify-center rounded-full bg-rose-500/20 text-2xl font-bold text-rose-300">!</div>
+          <div class="flex h-12 w-12 items-center justify-center rounded-full bg-orange-500/20 text-2xl font-bold text-orange-300">!</div>
           <p class="text-sm font-bold">Kamera tidak dapat diakses</p>
           <p id="camera-error-msg" class="text-xs leading-relaxed text-slate-300"></p>
-          <label class="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-800 shadow transition hover:bg-rose-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-rose-400 focus-within:ring-offset-2 focus-within:ring-offset-slate-900">
+          <label class="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-800 shadow transition hover:bg-orange-50 focus-within:outline-none focus-within:ring-2 focus-within:ring-orange-400 focus-within:ring-offset-2 focus-within:ring-offset-slate-900">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
             Pilih gambar dari galeri
             <input type="file" id="file-input-2" accept="image/*" class="sr-only">
           </label>
-          <button id="btn-retry-camera" class="rounded-full bg-white/10 px-4 py-2 text-xs font-bold text-white ring-1 ring-white/30 transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Cuba semula</button>
+          <button id="btn-retry-camera" class="rounded-full bg-white/10 px-4 py-2 text-xs font-bold text-white ring-1 ring-white/30 transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Cuba semula</button>
         </div>
         <div id="analyzing" class="absolute inset-x-0 bottom-0 z-10 hidden items-center justify-center gap-2 bg-slate-900/80 px-4 py-3 text-sm font-semibold text-white">
           <div class="h-4 w-4 animate-spin rounded-full border-2 border-white/25 border-t-white"></div>
-          Menganalisis bibir…
+          Menganalisis bibirâ€¦
         </div>
       </div>
-      <p class="mt-3 text-center text-xs leading-relaxed text-slate-500">Letakkan wajah anda dalam bingkai — bibir akan dikesan automatik. Keringkan peluh dan gunakan cahaya yang mencukupi.</p>
-      <button id="btn-capture" disabled class="mt-4 w-full rounded-2xl bg-rose-600 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-rose-600/25 transition hover:bg-rose-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">Tangkap</button>
+      <p class="mt-3 text-center text-xs leading-relaxed text-slate-500">Letakkan wajah anda dalam bingkai â€” bibir akan dikesan automatik. Keringkan peluh dan gunakan cahaya yang mencukupi.</p>
+      <button id="btn-capture" disabled class="mt-4 w-full rounded-2xl bg-orange-500 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">Tangkap</button>
     </section>
 
     <section id="screen-result" class="hidden" aria-label="Skrin keputusan">
@@ -83,22 +83,22 @@
         <svg class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 200 240" fill="none" aria-hidden="true" style="width: 76%; height: 68%;">
           <path d="M 100 16 C 146 16 176 54 176 102 C 176 148 150 182 118 198 C 111 201 89 201 82 198 C 50 182 24 148 24 102 C 24 54 54 16 100 16 Z" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-dasharray="9 7" stroke-linecap="round" fill="none"/>
           <path d="M 26 206 C 32 234 64 244 100 244 C 136 244 168 234 174 206" stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-dasharray="9 7" stroke-linecap="round" fill="none"/>
-          <path d="M 58 150 C 70 130 88 122 94 124 C 97 125 99 129 100 131 C 101 129 103 125 106 124 C 112 122 130 130 142 150 C 130 166 110 172 100 172 C 90 172 70 166 58 150 Z" stroke="rgba(255,255,255,0.95)" stroke-width="2" stroke-dasharray="6 5" stroke-linecap="round" fill="rgba(225,29,72,0.28)"/>
+          <path d="M 58 150 C 70 130 88 122 94 124 C 97 125 99 129 100 131 C 101 129 103 125 106 124 C 112 122 130 130 142 150 C 130 166 110 172 100 172 C 90 172 70 166 58 150 Z" stroke="rgba(255,255,255,0.95)" stroke-width="2" stroke-dasharray="6 5" stroke-linecap="round" fill="rgba(251,146,60,0.30)"/>
         </svg>
         <div class="pointer-events-none absolute inset-x-6 bottom-3 rounded-full bg-black/40 px-3 py-1 text-center text-[11px] font-semibold text-white/90 backdrop-blur-sm" aria-hidden="true">Bingkai yang dianalisis</div>
       </div>
 
       <article id="cond-card" class="mt-4 rounded-3xl border border-slate-100 bg-white p-5 shadow-sm">
         <div class="flex items-center justify-between gap-2">
-          <span id="cond-badge" class="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold">–</span>
-          <span id="conf-pct" class="text-sm font-extrabold text-slate-800">–</span>
+          <span id="cond-badge" class="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold">â€“</span>
+          <span id="conf-pct" class="text-sm font-extrabold text-slate-800">â€“</span>
         </div>
         <div class="mt-4">
           <div class="flex items-center justify-between text-xs font-semibold text-slate-600">
             <span>Keyakinan analisis</span>
           </div>
           <div class="mt-1.5 h-2.5 w-full overflow-hidden rounded-full bg-slate-200">
-            <div id="conf-bar" class="h-full rounded-full bg-gradient-to-r from-rose-500 to-pink-500 transition-all duration-500" style="width:0%"></div>
+            <div id="conf-bar" class="h-full rounded-full bg-gradient-to-r from-orange-500 to-amber-400 transition-all duration-500" style="width:0%"></div>
           </div>
         </div>
       </article>
@@ -110,7 +110,7 @@
             <h3 class="text-sm font-semibold text-slate-700">Kecerahan (L*)</h3>
             <div class="flex items-center gap-2">
               <span id="m-light-tag" class="rounded-full px-2 py-0.5 text-xs font-bold"></span>
-              <span id="m-light-value" class="text-sm font-extrabold text-slate-800">–</span>
+              <span id="m-light-value" class="text-sm font-extrabold text-slate-800">â€“</span>
             </div>
           </div>
           <div class="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-slate-100">
@@ -124,7 +124,7 @@
             <h3 class="text-sm font-semibold text-slate-700">Tekstur</h3>
             <div class="flex items-center gap-2">
               <span id="m-texture-tag" class="rounded-full px-2 py-0.5 text-xs font-bold"></span>
-              <span id="m-texture-value" class="text-sm font-extrabold text-slate-800">–</span>
+              <span id="m-texture-value" class="text-sm font-extrabold text-slate-800">â€“</span>
             </div>
           </div>
           <div class="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-slate-100">
@@ -138,7 +138,7 @@
             <h3 class="text-sm font-semibold text-slate-700">Kemerahan (a*)</h3>
             <div class="flex items-center gap-2">
               <span id="m-redness-tag" class="rounded-full px-2 py-0.5 text-xs font-bold"></span>
-              <span id="m-redness-value" class="text-sm font-extrabold text-slate-800">–</span>
+              <span id="m-redness-value" class="text-sm font-extrabold text-slate-800">â€“</span>
             </div>
           </div>
           <div class="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-slate-100">
@@ -149,8 +149,8 @@
       </div>
 
       <div class="mt-6 grid grid-cols-2 gap-3">
-        <button id="btn-rescan" class="rounded-2xl bg-white px-6 py-4 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2">Imbas semula</button>
-        <button id="btn-save" class="rounded-2xl bg-rose-600 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-rose-600/25 transition hover:bg-rose-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">Simpan ke riwayat</button>
+        <button id="btn-rescan" class="rounded-2xl bg-white px-6 py-4 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2">Imbas semula</button>
+        <button id="btn-save" class="rounded-2xl bg-orange-500 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">Simpan ke riwayat</button>
       </div>
       <p id="save-status" aria-live="polite" class="mt-3 text-center text-sm font-semibold text-slate-600"></p>
     </section>
@@ -160,16 +160,16 @@
         <h2 class="text-lg font-extrabold text-slate-800">Riwayat</h2>
         <div class="flex items-center gap-2">
           <span id="history-count" class="text-xs font-semibold text-slate-500"></span>
-          <button id="btn-history-load" class="rounded-full bg-white px-3 py-1.5 text-xs font-bold text-rose-600 shadow-sm ring-1 ring-rose-200 transition hover:bg-rose-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2">Muat semula</button>
+          <button id="btn-history-load" class="rounded-full bg-white px-3 py-1.5 text-xs font-bold text-orange-600 shadow-sm ring-1 ring-orange-200 transition hover:bg-orange-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2">Muat semula</button>
         </div>
       </div>
       <div id="history-loading" class="mt-6 flex-col items-center gap-3 py-10 text-slate-500">
-        <div class="h-8 w-8 animate-spin rounded-full border-4 border-rose-200 border-t-rose-600"></div>
-        <p class="text-xs font-semibold">Memuat riwayat…</p>
+        <div class="h-8 w-8 animate-spin rounded-full border-4 border-orange-200 border-t-orange-500"></div>
+        <p class="text-xs font-semibold">Memuat riwayatâ€¦</p>
       </div>
-      <div id="history-error" class="mt-6 hidden flex-col items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 p-6 text-center">
-        <p id="history-error-msg" class="text-sm font-semibold text-rose-700"></p>
-        <button id="btn-retry-history" class="rounded-full bg-rose-600 px-4 py-2 text-xs font-bold text-white shadow transition hover:bg-rose-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2">Cuba semula</button>
+      <div id="history-error" class="mt-6 hidden flex-col items-center gap-3 rounded-2xl border border-orange-200 bg-orange-50 p-6 text-center">
+        <p id="history-error-msg" class="text-sm font-semibold text-orange-600"></p>
+        <button id="btn-retry-history" class="rounded-full bg-orange-500 px-4 py-2 text-xs font-bold text-white shadow transition hover:bg-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2">Cuba semula</button>
       </div>
       <p id="history-empty" class="mt-6 hidden rounded-2xl border border-dashed border-slate-200 bg-white p-8 text-center text-sm text-slate-500">Belum ada riwayat. Imbas bibir anda dahulu.</p>
       <ul id="history-list" class="mt-4 space-y-3"></ul>
@@ -178,13 +178,13 @@
 
   <nav class="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur" aria-label="Navigasi utama">
     <div class="mx-auto grid max-w-md grid-cols-2">
-      <button id="tab-scan" class="flex flex-col items-center gap-1 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500" aria-current="page">
-        <span id="tab-scan-icon" class="flex h-9 w-16 items-center justify-center rounded-full bg-rose-600 text-white transition-colors">
+      <button id="tab-scan" class="flex flex-col items-center gap-1 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500" aria-current="page">
+        <span id="tab-scan-icon" class="flex h-9 w-16 items-center justify-center rounded-full bg-orange-500 text-white transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
         </span>
-        <span id="tab-scan-label" class="text-xs font-bold text-rose-700 transition-colors">Imbas</span>
+        <span id="tab-scan-label" class="text-xs font-bold text-orange-600 transition-colors">Imbas</span>
       </button>
-      <button id="tab-history" class="flex flex-col items-center gap-1 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">
+      <button id="tab-history" class="flex flex-col items-center gap-1 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
         <span id="tab-history-icon" class="flex h-9 w-16 items-center justify-center rounded-full text-slate-400 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </span>
@@ -223,13 +223,13 @@
       var COND_STYLES = {
         [CONDITIONS.DRY]: { card: 'border-amber-200 bg-amber-50', badge: 'bg-amber-100 text-amber-800' },
         [CONDITIONS.DULL]: { card: 'border-purple-200 bg-purple-50', badge: 'bg-purple-100 text-purple-800' },
-        [CONDITIONS.SENSITIVE]: { card: 'border-rose-200 bg-rose-50', badge: 'bg-rose-100 text-rose-700' },
+        [CONDITIONS.SENSITIVE]: { card: 'border-orange-200 bg-orange-50', badge: 'bg-orange-100 text-orange-600' },
         [CONDITIONS.NONE]: { card: 'border-emerald-200 bg-emerald-50', badge: 'bg-emerald-100 text-emerald-700' }
       };
 
-      var TAB_ACTIVE_ICON = 'flex h-9 w-16 items-center justify-center rounded-full bg-rose-600 text-white transition-colors';
+      var TAB_ACTIVE_ICON = 'flex h-9 w-16 items-center justify-center rounded-full bg-orange-500 text-white transition-colors';
       var TAB_IDLE_ICON = 'flex h-9 w-16 items-center justify-center rounded-full text-slate-400 transition-colors';
-      var TAB_ACTIVE_LABEL = 'text-xs font-bold text-rose-700 transition-colors';
+      var TAB_ACTIVE_LABEL = 'text-xs font-bold text-orange-600 transition-colors';
       var TAB_IDLE_LABEL = 'text-xs font-bold text-slate-500 transition-colors';
 
       var state = { stream: null, cameraActive: false, lastResult: null, saving: false, analyzing: false, saved: false, cameraMode: 'environment', usingFront: false };
@@ -245,7 +245,7 @@
       }
 
       function num(value) {
-        return typeof value === 'number' && isFinite(value) ? value.toFixed(1) : '–';
+        return typeof value === 'number' && isFinite(value) ? value.toFixed(1) : 'â€“';
       }
 
       function formatDate(value) {
@@ -258,7 +258,7 @@
       function toast(message, isError) {
         var el = $('toast');
         el.textContent = message;
-        el.className = 'pointer-events-none fixed inset-x-0 top-20 z-50 mx-auto w-fit max-w-[90%] rounded-full px-4 py-2 text-center text-sm font-semibold text-white shadow-lg transition-opacity duration-300 ' + (isError ? 'bg-rose-600' : 'bg-slate-900');
+        el.className = 'pointer-events-none fixed inset-x-0 top-20 z-50 mx-auto w-fit max-w-[90%] rounded-full px-4 py-2 text-center text-sm font-semibold text-white shadow-lg transition-opacity duration-300 ' + (isError ? 'bg-orange-500' : 'bg-slate-900');
         el.style.opacity = '1';
         clearTimeout(toastTimer);
         toastTimer = setTimeout(function () { el.style.opacity = '0'; }, 2600);
@@ -332,7 +332,7 @@
           return;
         }
         if (window.isSecureContext === false) {
-          failCamera('Halaman ini bukan konteks selamat (HTTPS) — pelayar sekat kamera. Buka URL ini terus dalam pelayar.');
+          failCamera('Halaman ini bukan konteks selamat (HTTPS) â€” pelayar sekat kamera. Buka URL ini terus dalam pelayar.');
           return;
         }
         var s = null;
@@ -590,16 +590,16 @@
         var pct = Math.round(m.flakeRatio * 100);
         return {
           lightness: m.lightness <= THRESHOLDS.kusamLightness
-            ? 'L* purata ' + m.lightness.toFixed(1) + ' (rendah <' + THRESHOLDS.kusamLightness + ') — bibir nampak kusam/gelap.'
-            : 'L* purata ' + m.lightness.toFixed(1) + ' — kecerahan bibir normal (≥' + THRESHOLDS.kusamLightness + ').',
+            ? 'L* purata ' + m.lightness.toFixed(1) + ' (rendah <' + THRESHOLDS.kusamLightness + ') â€” bibir nampak kusam/gelap.'
+            : 'L* purata ' + m.lightness.toFixed(1) + ' â€” kecerahan bibir normal (â‰¥' + THRESHOLDS.kusamLightness + ').',
           texture: m.texture >= THRESHOLDS.textureKering
-            ? 'Tekstur kasar (variance Laplacian ' + m.texture.toFixed(1) + ', ≥' + THRESHOLDS.textureKering + ') — tanda kering/menggelupas.' + (m.flakeRatio >= THRESHOLDS.flakeRatio ? ' ' + pct + '% piksel cerah dikesan (serpihan kulit).' : '')
+            ? 'Tekstur kasar (variance Laplacian ' + m.texture.toFixed(1) + ', â‰¥' + THRESHOLDS.textureKering + ') â€” tanda kering/menggelupas.' + (m.flakeRatio >= THRESHOLDS.flakeRatio ? ' ' + pct + '% piksel cerah dikesan (serpihan kulit).' : '')
             : m.flakeRatio >= THRESHOLDS.flakeRatio
-              ? 'Tekstur normal tetapi ' + pct + '% piksel cerah (serpihan) dikesan — kulit bibir mula menggelupas.'
-              : 'Tekstur bibir halus (variance Laplacian ' + m.texture.toFixed(1) + ') — permukaan normal.',
+              ? 'Tekstur normal tetapi ' + pct + '% piksel cerah (serpihan) dikesan â€” kulit bibir mula menggelupas.'
+              : 'Tekstur bibir halus (variance Laplacian ' + m.texture.toFixed(1) + ') â€” permukaan normal.',
           redness: m.redness >= THRESHOLDS.sensitifRedness
-            ? 'Kemerahan tinggi (a* ' + m.redness.toFixed(1) + ', ≥' + THRESHOLDS.sensitifRedness + ') — mungkin sensitif/meradang.'
-            : 'Kemerahan normal (a* ' + m.redness.toFixed(1) + ', <' + THRESHOLDS.sensitifRedness + ') — tiada tanda keradangan.'
+            ? 'Kemerahan tinggi (a* ' + m.redness.toFixed(1) + ', â‰¥' + THRESHOLDS.sensitifRedness + ') â€” mungkin sensitif/meradang.'
+            : 'Kemerahan normal (a* ' + m.redness.toFixed(1) + ', <' + THRESHOLDS.sensitifRedness + ') â€” tiada tanda keradangan.'
         };
       }
 
@@ -607,7 +607,7 @@
         if (tag === 'Kusam') return 'bg-purple-100 text-purple-700';
         if (tag === 'Cerah' || tag === 'Halus' || tag === 'Normal') return 'bg-emerald-100 text-emerald-700';
         if (tag === 'Sederhana' || tag === 'Meningkat') return 'bg-amber-100 text-amber-700';
-        return 'bg-rose-100 text-rose-700';
+        return 'bg-orange-100 text-orange-600';
       }
 
       function setMetric(key, value, max, tag, fillClass, reason) {
@@ -644,9 +644,9 @@
         var lightnessTag = m.lightness <= THRESHOLDS.kusamLightness ? 'Kusam' : m.lightness >= THRESHOLDS.cerahL ? 'Cerah' : 'Normal';
         setMetric('light', m.lightness, 100, lightnessTag, lightnessTag === 'Kusam' ? 'bg-purple-500' : lightnessTag === 'Cerah' ? 'bg-emerald-500' : 'bg-slate-400', reasons.lightness);
         var textureTag = m.texture >= THRESHOLDS.textureKering ? 'Kasar' : m.texture >= THRESHOLDS.textureSederhana ? 'Sederhana' : 'Halus';
-        setMetric('texture', m.texture, 40, textureTag, textureTag === 'Kasar' ? 'bg-rose-500' : textureTag === 'Sederhana' ? 'bg-amber-500' : 'bg-emerald-500', reasons.texture);
+        setMetric('texture', m.texture, 40, textureTag, textureTag === 'Kasar' ? 'bg-orange-500' : textureTag === 'Sederhana' ? 'bg-amber-500' : 'bg-emerald-500', reasons.texture);
         var rednessTag = m.redness >= THRESHOLDS.sensitifRedness ? 'Tinggi' : m.redness >= THRESHOLDS.kemerahanNormal ? 'Meningkat' : 'Normal';
-        setMetric('redness', m.redness, 40, rednessTag, rednessTag === 'Tinggi' ? 'bg-rose-600' : rednessTag === 'Meningkat' ? 'bg-amber-500' : 'bg-emerald-500', reasons.redness);
+        setMetric('redness', m.redness, 40, rednessTag, rednessTag === 'Tinggi' ? 'bg-orange-500' : rednessTag === 'Meningkat' ? 'bg-amber-500' : 'bg-emerald-500', reasons.redness);
 
         $('save-status').textContent = '';
         var btn = $('btn-save');
@@ -751,10 +751,10 @@
         var btn = $('btn-save');
         btn.disabled = true;
         var label = btn.textContent;
-        btn.textContent = 'Menyimpan…';
+        btn.textContent = 'Menyimpanâ€¦';
         var status = $('save-status');
         status.className = 'mt-3 text-center text-sm font-semibold text-slate-600';
-        status.textContent = 'Menyimpan ke riwayat…';
+        status.textContent = 'Menyimpan ke riwayatâ€¦';
         var payload = state.lastResult;
         var params = 'action=save' +
           '&condition=' + encodeURIComponent(payload.condition) +
@@ -770,14 +770,14 @@
             toast('Disimpan ke riwayat.');
           } else {
             var msg = data && data.error ? data.error : 'Ralat menyimpan.';
-            status.className = 'mt-3 text-center text-sm font-semibold text-rose-700';
+            status.className = 'mt-3 text-center text-sm font-semibold text-orange-600';
             status.textContent = msg;
             btn.disabled = false;
             btn.textContent = label;
           }
         }, function () {
           state.saving = false;
-          status.className = 'mt-3 text-center text-sm font-semibold text-rose-700';
+          status.className = 'mt-3 text-center text-sm font-semibold text-orange-600';
           status.textContent = 'Ralat sambungan ke pelayan. Semak internet dan cuba lagi.';
           btn.disabled = false;
           btn.textContent = label;
@@ -819,7 +819,7 @@
           var date = formatDate(s.created_at);
           var hasMetrics = m && (typeof m.lightness === 'number' || typeof m.redness === 'number');
           var brief = hasMetrics
-            ? 'L* ' + num(m.lightness) + ' · a* ' + num(m.redness) + ' · tekstur ' + num(m.texture)
+            ? 'L* ' + num(m.lightness) + ' Â· a* ' + num(m.redness) + ' Â· tekstur ' + num(m.texture)
             : 'tiada metrik';
           return '<li class="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">' +
             '<div class="flex items-center justify-between gap-2">' +
