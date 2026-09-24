@@ -178,16 +178,16 @@
 
       <div class="mt-6 grid grid-cols-2 gap-3">
         <button id="btn-rescan" class="rounded-2xl bg-white px-6 py-4 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2">Imbas semula</button>
-        <button id="btn-save" class="rounded-2xl bg-orange-500 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">Simpan ke riwayat</button>
+        <button id="btn-save" class="rounded-2xl bg-orange-500 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">Simpan ke kilauan</button>
       </div>
       <p id="save-status" aria-live="polite" class="mt-3 text-center text-sm font-semibold text-slate-600"></p>
         </div>
       </div>
     </section>
 
-    <section id="screen-history" class="hidden" aria-label="Skrin riwayat">
+    <section id="screen-history" class="hidden" aria-label="Skrin kilauan">
       <div class="flex items-center justify-between">
-        <h2 class="text-lg font-extrabold text-slate-800">Riwayat</h2>
+        <h2 class="text-lg font-extrabold text-slate-800">Kilauan</h2>
         <div class="flex items-center gap-2">
           <span id="history-count" class="text-xs font-semibold text-slate-500"></span>
           <button id="btn-history-load" class="rounded-full bg-white px-3 py-1.5 text-xs font-bold text-orange-600 shadow-sm ring-1 ring-orange-200 transition hover:bg-orange-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2">Muat semula</button>
@@ -195,13 +195,13 @@
       </div>
       <div id="history-loading" class="mt-6 flex-col items-center gap-3 py-10 text-slate-500">
         <div class="h-8 w-8 animate-spin rounded-full border-4 border-orange-200 border-t-orange-500"></div>
-        <p class="text-xs font-semibold">Memuat riwayatâ€¦</p>
+        <p class="text-xs font-semibold">Memuat kilauanâ€¦</p>
       </div>
       <div id="history-error" class="mt-6 hidden flex-col items-center gap-3 rounded-2xl border border-orange-200 bg-orange-50 p-6 text-center">
         <p id="history-error-msg" class="text-sm font-semibold text-orange-600"></p>
         <button id="btn-retry-history" class="rounded-full bg-orange-500 px-4 py-2 text-xs font-bold text-white shadow transition hover:bg-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2">Cuba semula</button>
       </div>
-      <p id="history-empty" class="mt-6 hidden rounded-2xl border border-dashed border-slate-200 bg-white p-8 text-center text-sm text-slate-500">Belum ada riwayat. Imbas bibir anda dahulu.</p>
+      <p id="history-empty" class="mt-6 hidden rounded-2xl border border-dashed border-slate-200 bg-white p-8 text-center text-sm text-slate-500">Belum ada kilauan. Imbas bibir anda dahulu.</p>
       <ul id="history-list" class="mt-4 space-y-3"></ul>
     </section>
   </main>
@@ -218,7 +218,7 @@
         <span id="tab-history-icon" class="flex h-9 w-16 items-center justify-center rounded-full text-slate-400 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </span>
-        <span id="tab-history-label" class="text-xs font-bold text-slate-500 transition-colors">Riwayat</span>
+        <span id="tab-history-label" class="text-xs font-bold text-slate-500 transition-colors">Kilauan</span>
       </button>
     </div>
   </nav>
@@ -707,7 +707,7 @@
 
         $('save-status').textContent = '';
         var btn = $('btn-save');
-        btn.textContent = 'Simpan ke riwayat';
+        btn.textContent = 'Simpan ke kilauan';
         btn.disabled = false;
 
         stopCamera();
@@ -811,7 +811,7 @@
         btn.textContent = 'Menyimpanâ€¦';
         var status = $('save-status');
         status.className = 'mt-3 text-center text-sm font-semibold text-slate-600';
-        status.textContent = 'Menyimpan ke riwayatâ€¦';
+        status.textContent = 'Menyimpan ke kilauanâ€¦';
         var payload = state.lastResult;
         var params = 'action=save' +
           '&condition=' + encodeURIComponent(payload.condition) +
@@ -822,9 +822,9 @@
           if (data && data.ok) {
             state.saved = true;
             status.className = 'mt-3 text-center text-sm font-semibold text-emerald-700';
-            status.textContent = 'Disimpan ke riwayat.';
+            status.textContent = 'Disimpan ke kilauan.';
             btn.textContent = 'Disimpan';
-            toast('Disimpan ke riwayat.');
+            toast('Disimpan ke kilauan.');
           } else {
             var msg = data && data.error ? data.error : 'Ralat menyimpan.';
             status.className = 'mt-3 text-center text-sm font-semibold text-orange-600';
@@ -849,7 +849,7 @@
         jsonp_('action=list', function (data) {
           hideEl($('history-loading'));
           if (!data || !data.ok) {
-            $('history-error-msg').textContent = data && data.error ? data.error : 'Ralat memuat riwayat.';
+            $('history-error-msg').textContent = data && data.error ? data.error : 'Ralat memuat kilauan.';
             showEl($('history-error'));
             return;
           }
