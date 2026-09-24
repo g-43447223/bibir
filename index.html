@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Kesan Condition Bibir</title>
+  <title>Citrus Glow Elixir</title>
   <meta name="theme-color" content="#f97316">
   <meta name="description" content="Analisis kondisi bibir: kering, kusam, sensitif, atau sihat terus dari kamera anda.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
 <body class="min-h-screen bg-orange-50 font-sans text-slate-800 antialiased">
   <header class="fixed inset-x-0 top-0 z-40 bg-gradient-to-r from-orange-500 to-amber-400 text-white shadow-md">
     <div class="mx-auto max-w-md px-4 pb-2.5 pt-[calc(env(safe-area-inset-top)+0.8rem)]">
-      <h1 class="truncate text-base font-extrabold leading-tight sm:text-lg">Kesan Condition Bibir</h1>
+      <h1 class="truncate text-base font-extrabold leading-tight sm:text-lg">Citrus Glow Elixir</h1>
       <p class="truncate text-[11px] font-medium text-orange-100">Analisis keadaan bibir anda terus dari kamera</p>
     </div>
   </header>
@@ -68,14 +68,18 @@
           </label>
           <button id="btn-retry-camera" class="rounded-full bg-white/10 px-4 py-2 text-xs font-bold text-white ring-1 ring-white/30 transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Cuba semula</button>
         </div>
+        <div id="capture-wrap" class="pointer-events-none absolute inset-x-0 bottom-5 z-[5] flex justify-center">
+          <button id="btn-capture" type="button" disabled class="pointer-events-auto flex h-16 w-16 items-center justify-center rounded-full border-4 border-white/90 bg-white text-orange-500 shadow-xl transition hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 disabled:cursor-not-allowed disabled:opacity-40" aria-label="Tangkap">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+          </button>
+        </div>
         <div id="analyzing" class="absolute inset-x-0 bottom-0 z-10 hidden items-center justify-center gap-2 bg-slate-900/80 px-4 py-3 text-sm font-semibold text-white">
           <div class="h-4 w-4 animate-spin rounded-full border-2 border-white/25 border-t-white"></div>
           Menganalisis bibirâ€¦
         </div>
       </div>
       <p class="mt-3 text-center text-xs leading-relaxed text-slate-500">Letakkan wajah anda dalam bingkai â€” bibir akan dikesan automatik. Keringkan peluh dan gunakan cahaya yang mencukupi.</p>
-      <button id="btn-capture" disabled class="mt-4 w-full rounded-2xl bg-orange-500 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">Tangkap</button>
-    </section>
+      </section>
 
     <section id="screen-result" class="hidden" aria-label="Skrin keputusan">
       <div id="result-preview-box" class="relative w-full overflow-hidden rounded-3xl bg-slate-900 shadow-lg ring-1 ring-slate-900/10" style="aspect-ratio: 10 / 9">
