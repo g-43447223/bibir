@@ -230,7 +230,7 @@
       var TAB_ACTIVE_LABEL = 'text-xs font-bold text-rose-700 transition-colors';
       var TAB_IDLE_LABEL = 'text-xs font-bold text-slate-500 transition-colors';
 
-      var state = { stream: null, cameraActive: false, lastResult: null, saving: false, analyzing: false, saved: false, cameraMode: 'environment' };
+      var state = { stream: null, cameraActive: false, lastResult: null, saving: false, analyzing: false, saved: false, cameraMode: 'environment', usingFront: false };
 
       function clamp01(v) { return Math.min(1, Math.max(0, v)); }
       function showEl(el) { el.classList.remove('hidden'); }
@@ -301,6 +301,22 @@
         $('btn-cam-front').setAttribute('aria-pressed', String(!back));
       }
 
+      function trackFacing(track) {
+        if (!track) return '';
+        try {
+          var fm = track.getSettings().facingMode;
+          if (fm) return fm;
+        } catch (e) {}
+        var label = track.label || '';
+        if (/front|user/i.test(label)) return 'user';
+        if (/back|rear|environment/i.test(label)) return 'environment';
+        return '';
+      }
+
+      function applyVideoMirror() {
+        $('video').style.transform = state.usingFront ? 'scaleX(-1)' : 'none';
+      }
+
       async function openCamera() {
         if (state.cameraActive) return;
         var video = $('video');
@@ -334,6 +350,8 @@
         state.stream = s;
         video.srcObject = s;
         state.cameraActive = true;
+        state.usingFront = trackFacing(s.getVideoTracks()[0]) === 'user';
+        applyVideoMirror();
         await new Promise(function (resolve) {
           if (video.readyState >= 2) {
             resolve();
@@ -397,6 +415,10 @@
         canvas.width = W;
         canvas.height = H;
         var ctx = canvas.getContext('2d');
+        if (state.usingFront) {
+          ctx.translate(W, 0);
+          ctx.scale(-1, 1);
+        }
         ctx.drawImage(el, rect.x, rect.y, rect.w, rect.h, 0, 0, W, H);
         return canvas;
       }
@@ -815,6 +837,8 @@
         var file = event.target.files && event.target.files[0];
         if (!file) return;
         event.target.value = '';
+        state.usingFront = false;
+        applyVideoMirror();
         var url = URL.createObjectURL(file);
         var img = new Image();
         img.onload = function () {
