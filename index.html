@@ -52,7 +52,7 @@
         <div class="pointer-events-none absolute inset-x-6 top-6 rounded-full bg-black/40 px-3 py-1 text-center text-[11px] font-semibold text-white/90 backdrop-blur-sm" aria-hidden="true">Letakkan wajah dalam bingkai</div>
         <div id="camera-loading" class="absolute inset-0 z-10 hidden flex-col items-center justify-center gap-3 bg-slate-900/70 text-white">
           <div class="h-10 w-10 animate-spin rounded-full border-4 border-white/20 border-t-white"></div>
-          <p class="text-sm font-semibold">Menyediakan kameraâ€¦</p>
+          <p class="text-sm font-semibold">Menyediakan kamera...</p>
         </div>
         <div id="camera-start" class="absolute inset-0 z-10 hidden flex-col items-center justify-center gap-3 bg-slate-900/90 p-6 text-center text-white">
           <button id="btn-start-camera" class="rounded-full bg-orange-500 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition hover:bg-orange-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Mula Kamera</button>
@@ -85,10 +85,10 @@
         </div>
         <div id="analyzing" class="absolute inset-x-0 bottom-0 z-10 hidden items-center justify-center gap-2 bg-slate-900/80 px-4 py-3 text-sm font-semibold text-white">
           <div class="h-4 w-4 animate-spin rounded-full border-2 border-white/25 border-t-white"></div>
-          Menganalisis bibirâ€¦
+          Menganalisis bibir...
         </div>
       </div>
-      <p class="mt-3 text-center text-xs leading-relaxed text-slate-500">Letakkan wajah anda dalam bingkai â€” bibir akan dikesan automatik. Keringkan peluh dan gunakan cahaya yang mencukupi.</p>
+      <p class="mt-3 text-center text-xs leading-relaxed text-slate-500">Letakkan wajah anda dalam bingkai - bibir akan dikesan automatik. Keringkan peluh dan gunakan cahaya yang mencukupi.</p>
       </section>
 
     <section id="screen-result" class="sheet-backdrop fixed inset-0 z-50 hidden flex flex-col justify-end bg-slate-900/40 backdrop-blur-sm" aria-label="Pop-up keputusan">
@@ -122,8 +122,8 @@
 
       <article id="cond-card" class="mt-4 rounded-3xl border border-slate-100 bg-white p-5 shadow-sm">
         <div class="flex items-center justify-between gap-2">
-          <span id="cond-badge" class="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold">â€“</span>
-          <span id="conf-pct" class="text-sm font-extrabold text-slate-800">â€“</span>
+          <span id="cond-badge" class="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold">-</span>
+          <span id="conf-pct" class="text-sm font-extrabold text-slate-800">-</span>
         </div>
         <div class="mt-4">
           <div class="flex items-center justify-between text-xs font-semibold text-slate-600">
@@ -142,7 +142,7 @@
             <h3 class="text-sm font-semibold text-slate-700">Kecerahan (L*)</h3>
             <div class="flex items-center gap-2">
               <span id="m-light-tag" class="rounded-full px-2 py-0.5 text-xs font-bold"></span>
-              <span id="m-light-value" class="text-sm font-extrabold text-slate-800">â€“</span>
+              <span id="m-light-value" class="text-sm font-extrabold text-slate-800">-</span>
             </div>
           </div>
           <div class="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-slate-100">
@@ -156,7 +156,7 @@
             <h3 class="text-sm font-semibold text-slate-700">Tekstur</h3>
             <div class="flex items-center gap-2">
               <span id="m-texture-tag" class="rounded-full px-2 py-0.5 text-xs font-bold"></span>
-              <span id="m-texture-value" class="text-sm font-extrabold text-slate-800">â€“</span>
+              <span id="m-texture-value" class="text-sm font-extrabold text-slate-800">-</span>
             </div>
           </div>
           <div class="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-slate-100">
@@ -170,7 +170,7 @@
             <h3 class="text-sm font-semibold text-slate-700">Kemerahan (a*)</h3>
             <div class="flex items-center gap-2">
               <span id="m-redness-tag" class="rounded-full px-2 py-0.5 text-xs font-bold"></span>
-              <span id="m-redness-value" class="text-sm font-extrabold text-slate-800">â€“</span>
+              <span id="m-redness-value" class="text-sm font-extrabold text-slate-800">-</span>
             </div>
           </div>
           <div class="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-slate-100">
@@ -199,7 +199,7 @@
       </div>
       <div id="history-loading" class="mt-6 flex-col items-center gap-3 py-10 text-slate-500">
         <div class="h-8 w-8 animate-spin rounded-full border-4 border-orange-200 border-t-orange-500"></div>
-        <p class="text-xs font-semibold">Memuat kilauanâ€¦</p>
+        <p class="text-xs font-semibold">Memuat kilauan...</p>
       </div>
       <div id="history-error" class="mt-6 hidden flex-col items-center gap-3 rounded-2xl border border-orange-200 bg-orange-50 p-6 text-center">
         <p id="history-error-msg" class="text-sm font-semibold text-orange-600"></p>
@@ -281,7 +281,7 @@
       }
 
       function num(value) {
-        return typeof value === 'number' && isFinite(value) ? value.toFixed(1) : 'â€“';
+        return typeof value === 'number' && isFinite(value) ? value.toFixed(1) : '-';
       }
 
       function formatDate(value) {
@@ -368,7 +368,7 @@
           return;
         }
         if (window.isSecureContext === false) {
-          failCamera('Halaman ini bukan konteks selamat (HTTPS) â€” pelayar sekat kamera. Buka URL ini terus dalam pelayar.');
+          failCamera('Halaman ini bukan konteks selamat (HTTPS) - pelayar sekat kamera. Buka URL ini terus dalam pelayar.');
           return;
         }
         var s = null;
@@ -626,16 +626,16 @@
         var pct = Math.round(m.flakeRatio * 100);
         return {
           lightness: m.lightness <= THRESHOLDS.kusamLightness
-            ? 'L* purata ' + m.lightness.toFixed(1) + ' (rendah <' + THRESHOLDS.kusamLightness + ') â€” bibir nampak kusam/gelap.'
-            : 'L* purata ' + m.lightness.toFixed(1) + ' â€” kecerahan bibir normal (â‰¥' + THRESHOLDS.kusamLightness + ').',
+            ? 'L* purata ' + m.lightness.toFixed(1) + ' (rendah <' + THRESHOLDS.kusamLightness + ') - bibir nampak kusam/gelap.'
+            : 'L* purata ' + m.lightness.toFixed(1) + ' - kecerahan bibir normal (>=' + THRESHOLDS.kusamLightness + ').',
           texture: m.texture >= THRESHOLDS.textureKering
-            ? 'Tekstur kasar (variance Laplacian ' + m.texture.toFixed(1) + ', â‰¥' + THRESHOLDS.textureKering + ') â€” tanda kering/menggelupas.' + (m.flakeRatio >= THRESHOLDS.flakeRatio ? ' ' + pct + '% piksel cerah dikesan (serpihan kulit).' : '')
+            ? 'Tekstur kasar (variance Laplacian ' + m.texture.toFixed(1) + ', >=' + THRESHOLDS.textureKering + ') - tanda kering/menggelupas.' + (m.flakeRatio >= THRESHOLDS.flakeRatio ? ' ' + pct + '% piksel cerah dikesan (serpihan kulit).' : '')
             : m.flakeRatio >= THRESHOLDS.flakeRatio
-              ? 'Tekstur normal tetapi ' + pct + '% piksel cerah (serpihan) dikesan â€” kulit bibir mula menggelupas.'
-              : 'Tekstur bibir halus (variance Laplacian ' + m.texture.toFixed(1) + ') â€” permukaan normal.',
+              ? 'Tekstur normal tetapi ' + pct + '% piksel cerah (serpihan) dikesan - kulit bibir mula menggelupas.'
+              : 'Tekstur bibir halus (variance Laplacian ' + m.texture.toFixed(1) + ') - permukaan normal.',
           redness: m.redness >= THRESHOLDS.sensitifRedness
-            ? 'Kemerahan tinggi (a* ' + m.redness.toFixed(1) + ', â‰¥' + THRESHOLDS.sensitifRedness + ') â€” mungkin sensitif/meradang.'
-            : 'Kemerahan normal (a* ' + m.redness.toFixed(1) + ', <' + THRESHOLDS.sensitifRedness + ') â€” tiada tanda keradangan.'
+            ? 'Kemerahan tinggi (a* ' + m.redness.toFixed(1) + ', >=' + THRESHOLDS.sensitifRedness + ') - mungkin sensitif/meradang.'
+            : 'Kemerahan normal (a* ' + m.redness.toFixed(1) + ', <' + THRESHOLDS.sensitifRedness + ') - tiada tanda keradangan.'
         };
       }
 
@@ -814,10 +814,10 @@
         var btn = $('btn-save');
         btn.disabled = true;
         var label = btn.textContent;
-        btn.textContent = 'Menyimpanâ€¦';
+        btn.textContent = 'Menyimpan...';
         var status = $('save-status');
         status.className = 'mt-3 text-center text-sm font-semibold text-slate-600';
-        status.textContent = 'Menyimpan ke kilauanâ€¦';
+        status.textContent = 'Menyimpan ke kilauan...';
         var payload = state.lastResult;
         var params = 'action=save' +
           '&condition=' + encodeURIComponent(payload.condition) +
@@ -882,7 +882,7 @@
           var date = formatDate(s.created_at);
           var hasMetrics = m && (typeof m.lightness === 'number' || typeof m.redness === 'number');
           var brief = hasMetrics
-            ? 'L* ' + num(m.lightness) + ' Â· a* ' + num(m.redness) + ' Â· tekstur ' + num(m.texture)
+            ? 'L* ' + num(m.lightness) + ' - a* ' + num(m.redness) + ' - tekstur ' + num(m.texture)
             : 'tiada metrik';
           return '<li class="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">' +
             '<div class="flex items-center justify-between gap-2">' +
