@@ -15,31 +15,34 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"Segoe UI"', 'system-ui', 'sans-serif']
           }
         }
       }
     };
   </script>
   <style>
-    .popup-card { animation: pop-in 0.3s ease-out both; }
-    @keyframes pop-in {
-      from { opacity: 0; transform: scale(0.92) translateY(12px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+    .sheet-card { animation: sheet-up 0.32s cubic-bezier(0.32, 0.72, 0, 1) both; }
+    .sheet-backdrop { animation: fade-in 0.2s ease-out both; }
+    @keyframes sheet-up {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
-<body class="min-h-screen bg-orange-50 font-sans text-slate-800 antialiased">
-  <header class="fixed inset-x-0 top-0 z-40 bg-gradient-to-r from-orange-500 to-amber-400 text-white shadow-md">
-    <div class="mx-auto max-w-md px-4 pb-2.5 pt-[calc(env(safe-area-inset-top)+0.8rem)]">
-      <h1 class="truncate text-base font-extrabold leading-tight sm:text-lg">Citrus Glow Elixir</h1>
-      <p class="truncate text-[11px] font-medium text-orange-100">Analisis keadaan bibir anda terus dari kamera</p>
-    </div>
-  </header>
+<body class="min-h-dvh bg-[#F2F2F7] font-sans text-slate-800 antialiased">
+  <main class="mx-auto max-w-md px-4 pb-[calc(env(safe-area-inset-bottom)+7.5rem)] pt-[calc(env(safe-area-inset-top)+1.1rem)]">
+    <header class="px-1 pb-4" aria-label="Tajuk aplikasi">
+      <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Citrus Glow Elixir</h1>
+      <p class="mt-1 text-sm font-medium text-slate-500">Bibir segar oren mempesona</p>
+    </header>
 
-  <main class="mx-auto max-w-md px-4 pb-[calc(env(safe-area-inset-bottom)+7.5rem)] pt-[calc(env(safe-area-inset-top)+5.25rem)]">
     <section id="screen-camera" aria-label="Skrin kamera">
-      <div id="camera-box" class="relative mx-auto aspect-[3/4] w-full max-h-[72vh] overflow-hidden rounded-3xl bg-slate-900 shadow-lg ring-1 ring-slate-900/10">
+      <div id="camera-box" class="relative mx-auto aspect-[3/4] w-full max-h-[75vh] overflow-hidden rounded-[2rem] bg-slate-900 shadow-2xl ring-1 ring-slate-900/5">
         <video id="video" autoplay playsinline muted class="absolute inset-0 h-full w-full object-cover" aria-label="Pratonton kamera"></video>
         <svg class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 200 240" fill="none" aria-hidden="true" style="width: 76%; height: 68%;">
           <path d="M 100 16 C 146 16 176 54 176 102 C 176 148 150 182 118 198 C 111 201 89 201 82 198 C 50 182 24 148 24 102 C 24 54 54 16 100 16 Z" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-dasharray="9 7" stroke-linecap="round" fill="none"/>
@@ -88,15 +91,16 @@
       <p class="mt-3 text-center text-xs leading-relaxed text-slate-500">Letakkan wajah anda dalam bingkai â€” bibir akan dikesan automatik. Keringkan peluh dan gunakan cahaya yang mencukupi.</p>
       </section>
 
-    <section id="screen-result" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/70 p-4 backdrop-blur-sm" aria-label="Pop-up keputusan">
-      <div class="popup-card relative flex max-h-[86vh] w-full max-w-md flex-col overflow-hidden rounded-3xl bg-white shadow-2xl">
-        <header class="flex items-center justify-between gap-2 border-b border-slate-100 px-5 py-3.5">
-          <h2 class="text-base font-extrabold text-slate-800">Keputusan Bibir</h2>
-          <button id="btn-close-result" type="button" class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition hover:bg-slate-200 hover:text-slate-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500" aria-label="Tutup pop-up">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
+    <section id="screen-result" class="sheet-backdrop fixed inset-0 z-50 hidden flex flex-col justify-end bg-slate-900/40 backdrop-blur-sm" aria-label="Pop-up keputusan">
+      <div class="sheet-card relative mx-auto flex max-h-[88dvh] w-full max-w-md flex-col overflow-hidden rounded-t-[1.75rem] rounded-b-none bg-[#F2F2F7] shadow-2xl">
+        <div class="absolute left-1/2 top-2 h-1.5 w-10 -translate-x-1/2 rounded-full bg-slate-300" aria-hidden="true"></div>
+        <header class="flex items-center justify-between gap-2 px-5 pb-2 pt-5">
+          <h2 class="text-lg font-extrabold tracking-tight text-slate-900">Keputusan Bibir</h2>
+          <button id="btn-close-result" type="button" class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-slate-500 shadow-sm ring-1 ring-slate-900/5 transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500" aria-label="Tutup pop-up">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
           </button>
         </header>
-        <div class="overflow-y-auto px-5 py-5">
+        <div class="min-h-0 overflow-y-auto px-5 pb-6 pt-1">
           <div id="result-preview-box" class="relative w-full overflow-hidden rounded-3xl bg-slate-900 shadow-lg ring-1 ring-slate-900/10" style="aspect-ratio: 10 / 9">
         <img id="result-img" alt="Gambar bibir yang dianalisis" class="absolute inset-0 h-full w-full object-cover">
         <svg class="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 200 240" fill="none" aria-hidden="true" style="width: 76%; height: 68%;">
@@ -187,7 +191,7 @@
 
     <section id="screen-history" class="hidden" aria-label="Skrin kilauan">
       <div class="flex items-center justify-between">
-        <h2 class="text-lg font-extrabold text-slate-800">Kilauan</h2>
+        <h2 class="text-3xl font-extrabold tracking-tight text-slate-900">Kilauan</h2>
         <div class="flex items-center gap-2">
           <span id="history-count" class="text-xs font-semibold text-slate-500"></span>
           <button id="btn-history-load" class="rounded-full bg-white px-3 py-1.5 text-xs font-bold text-orange-600 shadow-sm ring-1 ring-orange-200 transition hover:bg-orange-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2">Muat semula</button>
@@ -206,20 +210,22 @@
     </section>
   </main>
 
-  <nav class="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur" aria-label="Navigasi utama">
-    <div class="mx-auto grid max-w-md grid-cols-2">
-      <button id="tab-scan" class="flex flex-col items-center gap-1 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500" aria-current="page">
-        <span id="tab-scan-icon" class="flex h-9 w-16 items-center justify-center rounded-full bg-orange-500 text-white transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-        </span>
-        <span id="tab-scan-label" class="text-xs font-bold text-orange-600 transition-colors">Imbas</span>
-      </button>
-      <button id="tab-history" class="flex flex-col items-center gap-1 py-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
-        <span id="tab-history-icon" class="flex h-9 w-16 items-center justify-center rounded-full text-slate-400 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </span>
-        <span id="tab-history-label" class="text-xs font-bold text-slate-500 transition-colors">Kilauan</span>
-      </button>
+  <nav class="fixed inset-x-0 bottom-0 z-40 pb-[env(safe-area-inset-bottom)]" aria-label="Navigasi utama">
+    <div class="mx-auto max-w-md px-4 pb-3 pt-2">
+      <div class="grid grid-cols-2 gap-1 rounded-[1.7rem] border border-white/60 bg-white/80 p-1.5 shadow-lg shadow-slate-900/10 backdrop-blur-xl">
+        <button id="tab-scan" class="flex flex-col items-center gap-0.5 rounded-3xl py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500" aria-current="page">
+          <span id="tab-scan-icon" class="flex h-8 w-8 items-center justify-center rounded-xl bg-orange-500 text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          </span>
+          <span id="tab-scan-label" class="text-[11px] font-bold text-orange-600 transition-colors">Imbas</span>
+        </button>
+        <button id="tab-history" class="flex flex-col items-center gap-0.5 rounded-3xl py-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
+          <span id="tab-history-icon" class="flex h-8 w-8 items-center justify-center rounded-xl text-slate-400 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </span>
+          <span id="tab-history-label" class="text-[11px] font-bold text-slate-500 transition-colors">Kilauan</span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -257,10 +263,10 @@
         [CONDITIONS.NONE]: { card: 'border-emerald-200 bg-emerald-50', badge: 'bg-emerald-100 text-emerald-700' }
       };
 
-      var TAB_ACTIVE_ICON = 'flex h-9 w-16 items-center justify-center rounded-full bg-orange-500 text-white transition-colors';
-      var TAB_IDLE_ICON = 'flex h-9 w-16 items-center justify-center rounded-full text-slate-400 transition-colors';
-      var TAB_ACTIVE_LABEL = 'text-xs font-bold text-orange-600 transition-colors';
-      var TAB_IDLE_LABEL = 'text-xs font-bold text-slate-500 transition-colors';
+      var TAB_ACTIVE_ICON = 'flex h-8 w-8 items-center justify-center rounded-xl bg-orange-500 text-white transition-colors';
+      var TAB_IDLE_ICON = 'flex h-8 w-8 items-center justify-center rounded-xl text-slate-400 transition-colors';
+      var TAB_ACTIVE_LABEL = 'text-[11px] font-bold text-orange-600 transition-colors';
+      var TAB_IDLE_LABEL = 'text-[11px] font-bold text-slate-500 transition-colors';
 
       var state = { stream: null, cameraActive: false, lastResult: null, saving: false, analyzing: false, saved: false, cameraMode: 'environment', usingFront: false };
 
